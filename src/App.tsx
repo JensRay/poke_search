@@ -1,15 +1,15 @@
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 
-import RootLayout from './pages/RootLayout';
-import PokemonList from './pages/PokemonList';
-import PokemonPage from './pages/Pokemon';
+import RootLayoutPage from './pages/RootLayout.page';
+import PokemonListPage from './pages/PokemonList.page';
+import PokemonPage from './pages/Pokemon.page';
 
 import './App.css';
 
 const router = createBrowserRouter([
-  {path: '/', element: <RootLayout />, children: [
+  {path: '/', element: <RootLayoutPage />, children: [
     {path: '/', element: <Navigate to='/pokemons' replace/> },
-    {path: '/pokemons', element: <PokemonList />},
+    {path: '/pokemons', element: <PokemonListPage />},
     {path: '/pokemons/:pokemonId', element: <PokemonPage />},
   ]},
 ]);
