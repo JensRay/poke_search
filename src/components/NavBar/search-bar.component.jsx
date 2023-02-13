@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 
 import PokemonContext from "../../context/PokemonContext";
 
@@ -7,16 +7,48 @@ import "./search-bar.styles.scss";
 const SearchBar = () => {
   // const [searchedPhrase, setSearchedPhrase] = useState("");
 
-  const { searchedPhrase, setSearchedPhrase } = useContext(PokemonContext);
+  const {
+    searchedPhrase,
+    // setSearchedPhrase,
+    // pokemonsList,
+    // setPokemonsList,
+    // filteredPokemonsList,
+    // setFilteredPokemonsList,
+    filterSearchedPokemons,
+  } = useContext(PokemonContext);
 
-  // const filterSearchedPokes = (searchPhrase) => {
-  //   setFilter(searchPhrase);
+  // console.log(searchedPhrase);
+
+  // const filterSearchedPokemons = (searchedPhrase) => {
+  //   setSearchedPhrase(searchedPhrase.trim().toLowerCase());
+  //   // console.log(searchedPhrase);
+  //   console.log("search phrase");
+  //   console.log(searchedPhrase);
+  //   console.log(pokemonsList);
+
+  //   if (searchedPhrase !== "") {
+  //     const filteredPokemons = pokemonsList.filter((pokemon) =>
+  //       pokemon.name.includes(searchedPhrase)
+  //     );
+  //     console.log("not empty");
+  //     console.log(filteredPokemons);
+
+  //     setFilteredPokemonsList(filteredPokemons);
+  //     // console.log(filteredPokemonsList);
+  //   } else {
+  //     console.log("empty");
+  //     setFilteredPokemonsList(pokemonsList);
+  //     console.log(filteredPokemonsList);
+  //   }
   // };
 
   const handleSearch = ({ target }) => {
-    setSearchedPhrase(target.value);
+    filterSearchedPokemons(target.value.trim().toLowerCase());
+    // console.log(target.value);
   };
-
+  // console.log(searchedPhrase);
+  // console.log("all pokemons");
+  // console.log(filteredPokemonsList);
   // useEffect(() => {
   //   filterSearchedPokes(searchedPhrase);
   //   // return () => {};
@@ -31,6 +63,7 @@ const SearchBar = () => {
           placeholder="Search Teams"
           onChange={handleSearch}
           value={searchedPhrase}
+          name="searched phrase"
         />
       </div>
     </div>

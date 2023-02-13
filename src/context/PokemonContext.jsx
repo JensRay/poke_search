@@ -1,11 +1,13 @@
-import React from 'react';
+import React from "react";
 
 const PokemonContext = React.createContext({
   // changeLimit: '',
   // filterSearchedPokes: '',
   // limit: 0,
-  // searchedPhrase, setSearchedPhrase
-
+  searchedPhrase: "",
+  pokemonsList: [],
+  basePokemonList: [],
+  filteredPokemonsList: [],
 });
 
 export default PokemonContext;
