@@ -2,27 +2,40 @@ import { useState, useEffect, useCallback, useContext } from "react";
 
 // import DarkMode from "../UI/dark-mode.component";
 import PokemonCard from "../PokemonCard/pokemon-card.component";
-import PokemonContext from "../../context/PokemonContext";
 import "./pokemonList.styles.scss";
 
-const PokemonList = () => {
-  const { basePokemonList, pokemonsList, filteredPokemonsList } =
-    useContext(PokemonContext);
+const PokemonList = ({ basePokemonList, pokemonList, filteredPokemonList }) => {
   const [filter, setFilter] = useState("");
   const [offset, setOffset] = useState(0);
-  const [limit, setLimit] = useState(20);
 
-  const paginateNext = () => {
-    if (offset + limit < basePokemonList.length) {
-      setOffset(offset + limit);
-    }
-  };
+  // const [pokemonsList, setPokemonsList] = useState([]);
+  // const [filteredPokemonList, setFilterPokemonsList] = useState(() => {});
 
-  const paginatePrev = () => {
-    if (offset - limit >= 0) {
-      setOffset(offset - limit);
-    }
-  };
+  // const [searchedPhrase, setSearchedPhrase] = useState("");
+
+  // const [limit, setLimit] = useState(2);
+  // // type Pokemon = {name: string, url: string}
+  // const [pokemons, setPokemons] = useState([]);
+
+  // console.log(filteredPokemonsList);
+
+  // const changeLimit = (limit) => {
+  //   setLimit(limit);
+  // };
+
+  // const [limit, setLimit] = useState(20);
+
+  // const paginateNext = () => {
+  //   if (offset + limit < basePokemonList.length) {
+  //     setOffset(offset + limit);
+  //   }
+  // };
+
+  // const paginatePrev = () => {
+  //   if (offset - limit >= 0) {
+  //     setOffset(offset - limit);
+  //   }
+  // };
 
   // const { searchedPhrase, setSearchedPhrase } = useContext(PokemonContext);
   // // // type Pokemon = {name: string, url: string}
@@ -41,9 +54,9 @@ const PokemonList = () => {
   // const [limit, setLimit] = useState(20);
   // const [error, setError] = useState("");
 
-  //   const changeLimit = (limit) => {
-  //     setLimit(limit);
-  //   };
+  // const changeLimit = (limit) => {
+  //   setLimit(limit);
+  // };
 
   // console.log(searchedPhrase);
 
@@ -160,7 +173,9 @@ const PokemonList = () => {
   // console.log("first 20");
   // console.log(pokemonsList);
 
-  console.log(pokemonsList);
+  // console.log(limit);
+  // console.log(pokemonsList);
+  // console.log(basePokemonList);
 
   return (
     <div className="main-container">
@@ -195,20 +210,32 @@ const PokemonList = () => {
           {/* <DarkMode /> */}
         </div>
         <div className="pokemon-list__grid">
-          {filteredPokemonsList ? (
+          {pokemonList ? (
             <div className="row">
               {
-                filteredPokemonsList?.map(
-                  (pokemon) =>
-                    pokemon.name && (
-                      // .includes("bulba")
-                      <PokemonCard
-                        key={pokemon.name}
-                        name={pokemon.name}
-                        url={pokemon.url}
-                      />
+                pokemonList
+                  ? pokemonList?.map(
+                      (pokemon) =>
+                        pokemon.name && (
+                          // .includes("bulba")
+                          <PokemonCard
+                            key={pokemon.name}
+                            name={pokemon.name}
+                            url={pokemon.url}
+                          />
+                        )
                     )
-                )
+                  : pokemonList?.map(
+                      (pokemon) =>
+                        pokemon.name && (
+                          // .includes("bulba")
+                          <PokemonCard
+                            key={pokemon.name}
+                            name={pokemon.name}
+                            url={pokemon.url}
+                          />
+                        )
+                    )
                 // .split(offset, offset + limit)
               }
             </div>

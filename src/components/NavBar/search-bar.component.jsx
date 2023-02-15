@@ -1,21 +1,9 @@
-import { useContext } from "react";
-
-import PokemonContext from "../../context/PokemonContext";
+// import { useState } from "react";
 
 import "./search-bar.styles.scss";
 
-const SearchBar = () => {
+const SearchBar = ({ handleSearch, searchedPhrase }) => {
   // const [searchedPhrase, setSearchedPhrase] = useState("");
-
-  const {
-    searchedPhrase,
-    // setSearchedPhrase,
-    // pokemonsList,
-    // setPokemonsList,
-    // filteredPokemonsList,
-    // setFilteredPokemonsList,
-    filterSearchedPokemons,
-  } = useContext(PokemonContext);
 
   // console.log(searchedPhrase);
 
@@ -42,10 +30,6 @@ const SearchBar = () => {
   //   }
   // };
 
-  const handleSearch = ({ target }) => {
-    filterSearchedPokemons(target.value.trim().toLowerCase());
-    // console.log(target.value);
-  };
   // console.log(searchedPhrase);
   // console.log("all pokemons");
   // console.log(filteredPokemonsList);

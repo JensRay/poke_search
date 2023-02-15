@@ -9,7 +9,7 @@ import PokemonContext from "./PokemonContext";
 // const PokemonProvider = ({children}: Props) => {
 const PokemonProvider = ({ children }) => {
   // const PokemonProvider = ({ children }) => {
-  // const [searchedPhrase, setSearchedPhrase] = useState("");
+  const [searchedPhrase, setSearchedPhrase] = useState("");
   // const [pokemonsList, setPokemonsList] = useState([]);
   // const [filteredPokemonList, setFilterPokemonsList] = useState(() => {});
 
@@ -18,6 +18,7 @@ const PokemonProvider = ({ children }) => {
   const [pokemonsList, setPokemonsList] = useState([]);
   const [filteredPokemonsList, setFilteredPokemonsList] = useState([]);
   const [error, setError] = useState("");
+  const [limit, setLimit] = useState(2);
   // // type Pokemon = {name: string, url: string}
   // const [pokemons, setPokemons] = useState([]);
 
@@ -58,7 +59,9 @@ const PokemonProvider = ({ children }) => {
     getAllPokemons();
   }, [basePokemonList]);
 
+  // console.log(pokemonsList);
   const filterSearchedPokemons = (searchedPhrase) => {
+    setSearchedPhrase(searchedPhrase);
     // console.log(searchedPhrase);
     // setSearchedPhrase(searchedPhrase);
     // console.log(searchedPhrase);
@@ -82,7 +85,11 @@ const PokemonProvider = ({ children }) => {
       // console.log(filteredPokemonsList);
     }
   };
-  console.log(filteredPokemonsList);
+  // console.log(filteredPokemonsList);
+
+  const changeLimit = (limit) => {
+    setLimit(limit);
+  };
 
   return (
     <PokemonContext.Provider
@@ -91,6 +98,8 @@ const PokemonProvider = ({ children }) => {
         // searchedPhrase: searchedPhrase,
         filterSearchedPokemons: filterSearchedPokemons,
         filteredPokemonsList: filteredPokemonsList,
+        changeLimit: changeLimit,
+        limit: limit,
       }}
     >
       {children}

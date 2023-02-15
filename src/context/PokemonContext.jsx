@@ -8,6 +8,7 @@ const PokemonContext = React.createContext({
   pokemonsList: [],
   basePokemonList: [],
   filteredPokemonsList: [],
+  changeLimit: () => {},
 });
 
 export default PokemonContext;
