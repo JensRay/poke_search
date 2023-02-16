@@ -1,15 +1,15 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import "./results-per-page.styles.scss";
 
-import PokemonContext from "../../context/PokemonContext";
+// import PokemonContext from "../../context/PokemonContext";
 
 const ITEMS_PER_PAGE = [1, 2, 5];
 
-const ResultsPerPage = () =>
+const ResultsPerPage = ({ limit, setLimit }) =>
   // { changeLimit, limit }
   {
     const [isActive, setIsActive] = useState(false);
-    const [changeLimit, limit] = useState(20);
+    // const [changeLimit, limit] = useState(20);
 
     // console.log(limit);
 
@@ -19,7 +19,7 @@ const ResultsPerPage = () =>
 
     const handleClick = ({ target }) => {
       const { value } = target;
-      changeLimit(parseInt(value));
+      setLimit(parseInt(value));
       setIsActive(false);
     };
 
@@ -42,7 +42,7 @@ const ResultsPerPage = () =>
                 <button
                   key={n}
                   value={n}
-                  className={limit === n ? "results-per-page__active" : ""}
+                  className={limit !== n ? "results-per-page__active" : ""}
                 >
                   Show {n} results
                 </button>

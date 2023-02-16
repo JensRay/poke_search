@@ -6,6 +6,7 @@ const PokemonListPage = ({
   basePokemonList,
   pokemonList,
   filteredPokemonList,
+  paginatedPokmonList,
 }) => {
   return (
     <div>
@@ -13,6 +14,7 @@ const PokemonListPage = ({
         basePokemonList={basePokemonList}
         pokemonList={pokemonList}
         filteredPokemonList={filteredPokemonList}
+        paginatedPokmonList={paginatedPokmonList}
       />
       {/* <Link to='/pokemons/:id'>Pokemon</Link> */}
     </div>

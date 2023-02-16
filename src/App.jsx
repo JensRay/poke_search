@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -20,15 +20,27 @@ function App() {
   const [pokemonList, setPokemonList] = useState([]);
   const [filteredPokemonList, setFilteredPokemonList] = useState([]);
   const [error, setError] = useState("");
+  const [limit, setLimit] = useState(2);
+  const [offset, setOffset] = useState(0);
+  // const [paginatedPokemonList, setPaginatedPokemonList] = useState([]);
+
+  // const changeLimit = (limit) => {
+  //   setLimit(limit);
+  // };
 
   const handleSearch = ({ target }) => {
-    console.log("1");
     setSearchedPhrase(target.value.trim().toLowerCase());
-    console.log("2");
+
     filterSearchedPokemons(target.value.trim().toLowerCase());
     // console.log(target.value);
   };
 
+  // console.log(searchedPhrase);
+
+  const paginatedPokmonList = () => {
+    const filtered = filteredPokemonList.slice(offset, offset + limit);
+    return filtered;
+  };
   const router = createBrowserRouter([
     {
       path: "/",
@@ -36,6 +48,8 @@ function App() {
         <RootLayoutPage
           searchedPhrase={searchedPhrase}
           handleSearch={handleSearch}
+          limit={limit}
+          setLimit={setLimit}
         />
       ),
       children: [
@@ -50,6 +64,8 @@ function App() {
               basePokemonList={basePokemonList}
               pokemonList={pokemonList}
               filteredPokemonList={filteredPokemonList}
+              limit={limit}
+              paginatedPokmonList={paginatedPokmonList}
             />
           ),
         },
@@ -71,6 +87,7 @@ function App() {
   };
 
   useEffect(() => {
+    console.log("BasePOkemonList");
     getPokemonsList();
   }, []);
 
@@ -92,10 +109,28 @@ function App() {
       );
       setPokemonList(responses);
     };
+    console.log("PokemonList");
     getAllPokemons();
   }, [basePokemonList]);
 
+  useEffect(() => {
+    setFilteredPokemonList(pokemonList);
+  }, [pokemonList]);
+
   // console.log(pokemonsList);
+  // base pokemonsList to have a full list, never changing
+  // pokemonsList to have objects with all values needed for filtering, never changing
+  // filteredPokemonList based on pokemonList, changing when searchedPhrase
+  // to add further filter weight etc.
+  // paginatedPokemonList, based on filteredList, slicing
+
+  // useEffect(() => {
+  //   setFilteredPokemonList(pokemonList);
+  // }, [pokemonList]);
+
+  // if (searchedPhrase === "") {
+  //   setFilteredPokemonList(pokemonList);
+  // }
 
   const filterSearchedPokemons = (searchedPhrase) => {
     // setSearchedPhrase(searchedPhrase);
@@ -109,28 +144,39 @@ function App() {
     if (searchedPhrase !== "") {
       // console.log("not empty");
       // console.log(pokemonsList[0].name.includes(searchedPhrase));
-      const filteredPokemons = pokemonList.filter((pokemon) =>
+      const pokemons = pokemonList.filter((pokemon) =>
         pokemon.name.includes(searchedPhrase)
       );
-      console.log(filteredPokemons);
 
-      setPokemonList(filteredPokemons);
+      // setFilteredPokemonList(pokemons);
+      setFilteredPokemonList(pokemons);
+      console.log("filteringsearchedPokes");
     }
   };
 
-  return (
-    // <PokemonProvider
-    //   // value={{
-    //   //   // changeLimit: "",
-    //   //   // filterSearchedPokes: "",
-    //   //   // limit: 0,
-    //   //   searchedPhrase,
-    //   //   setSearchedPhrase,
-    //   // }}
-    // >
-    <RouterProvider router={router} />
-    // </PokemonProvider>
-  );
+  // useEffect(() => {
+  //   const pokemons = pokemonList.slice(offset, offset + limit);
+  //   // setPaginatedPokemonList(pokemons);
+  //   setFilteredPokemonList(pokemons);
+  // }, []);
+  // const paginate = useCallback(() => {
+  //   const filtered = filteredPokemonList.slice(offset, offset + limit);
+  //   setFilteredPokemonList(filtered);
+  // }, []);
+
+  // useEffect(() => {
+  //   paginate();
+  // }, [offset, limit, paginate]);
+
+  // useEffect(() => {
+  //   setFilteredPokemonList(paginatedPokemonList);
+  // }, [paginatedPokemonList]);
+  // setPaginatedPokemonList(pokemons);
+  // useEffect(() => {
+  //   setFilteredPokemonList(pokemons);
+  // }, [pokemons]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;

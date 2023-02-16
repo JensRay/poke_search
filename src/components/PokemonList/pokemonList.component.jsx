@@ -4,9 +4,13 @@ import { useState, useEffect, useCallback, useContext } from "react";
 import PokemonCard from "../PokemonCard/pokemon-card.component";
 import "./pokemonList.styles.scss";
 
-const PokemonList = ({ basePokemonList, pokemonList, filteredPokemonList }) => {
-  const [filter, setFilter] = useState("");
-  const [offset, setOffset] = useState(0);
+const PokemonList = ({
+  basePokemonList,
+  pokemonList,
+  filteredPokemonList,
+  paginatedPokmonList,
+}) => {
+  // const [filter, setFilter] = useState("");
 
   // const [pokemonsList, setPokemonsList] = useState([]);
   // const [filteredPokemonList, setFilterPokemonsList] = useState(() => {});
@@ -18,12 +22,6 @@ const PokemonList = ({ basePokemonList, pokemonList, filteredPokemonList }) => {
   // const [pokemons, setPokemons] = useState([]);
 
   // console.log(filteredPokemonsList);
-
-  // const changeLimit = (limit) => {
-  //   setLimit(limit);
-  // };
-
-  // const [limit, setLimit] = useState(20);
 
   // const paginateNext = () => {
   //   if (offset + limit < basePokemonList.length) {
@@ -210,11 +208,11 @@ const PokemonList = ({ basePokemonList, pokemonList, filteredPokemonList }) => {
           {/* <DarkMode /> */}
         </div>
         <div className="pokemon-list__grid">
-          {pokemonList ? (
+          {filteredPokemonList ? (
             <div className="row">
               {
-                pokemonList
-                  ? pokemonList?.map(
+                paginatedPokmonList().length !== 0
+                  ? paginatedPokmonList()?.map(
                       (pokemon) =>
                         pokemon.name && (
                           // .includes("bulba")
@@ -225,7 +223,7 @@ const PokemonList = ({ basePokemonList, pokemonList, filteredPokemonList }) => {
                           />
                         )
                     )
-                  : pokemonList?.map(
+                  : paginatedPokmonList()?.map(
                       (pokemon) =>
                         pokemon.name && (
                           // .includes("bulba")
