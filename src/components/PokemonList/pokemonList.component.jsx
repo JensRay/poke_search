@@ -166,11 +166,6 @@ const PokemonList = ({
 
   return (
     <div className="main-container">
-      {/* <Navigation
-        changeLimit={changeLimit}
-        filterSearchedPokes={filterSearchedPokes}
-        limit={limit}
-      /> */}
       <div className="pokemon-list__container">
         <div className="pokemon-list__header">
           <Pagination
@@ -187,32 +182,16 @@ const PokemonList = ({
         <div className="pokemon-list__grid">
           {filteredPokemonList ? (
             <div className="row">
-              {
-                paginatedPokemonList().length !== 0
-                  ? paginatedPokemonList()?.map(
-                      (pokemon) =>
-                        pokemon.name && (
-                          // .includes("bulba")
-                          <PokemonCard
-                            key={pokemon.name}
-                            name={pokemon.name}
-                            url={pokemon.url}
-                          />
-                        )
-                    )
-                  : paginatedPokemonList()?.map(
-                      (pokemon) =>
-                        pokemon.name && (
-                          // .includes("bulba")
-                          <PokemonCard
-                            key={pokemon.name}
-                            name={pokemon.name}
-                            url={pokemon.url}
-                          />
-                        )
-                    )
-                // .split(offset, offset + limit)
-              }
+              {paginatedPokemonList()?.map(
+                (pokemon) =>
+                  pokemon.name && (
+                    <PokemonCard
+                      key={pokemon.name}
+                      name={pokemon.name}
+                      url={pokemon.url}
+                    />
+                  )
+              )}
             </div>
           ) : (
             <div>loading...</div>

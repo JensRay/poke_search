@@ -33,24 +33,24 @@
 
 .row {
   display: grid;
-  grid-template-columns: auto;
+  grid-template-columns: 1fr;
   row-gap: 12px;
 }
 
 @media only screen and (min-width: 600px) {
   .row {
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 @media only screen and (min-width: 768px) {
   .row {
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
 @media only screen and (min-width: 1200px) {
   .row {
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
