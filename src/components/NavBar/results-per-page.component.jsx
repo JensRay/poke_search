@@ -5,7 +5,7 @@ import "./results-per-page.styles.scss";
 
 const ITEMS_PER_PAGE = [1, 2, 5];
 
-const ResultsPerPage = ({ limit, setLimit }) =>
+const ResultsPerPage = ({ limit, setLimit, setOffset, setPageNumber }) =>
   // { changeLimit, limit }
   {
     const [isActive, setIsActive] = useState(false);
@@ -18,9 +18,11 @@ const ResultsPerPage = ({ limit, setLimit }) =>
     };
 
     const handleClick = ({ target }) => {
+      setOffset(0);
       const { value } = target;
       setLimit(parseInt(value));
       setIsActive(false);
+      setPageNumber(1);
     };
 
     return (

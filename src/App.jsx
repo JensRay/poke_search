@@ -22,6 +22,7 @@ function App() {
   const [error, setError] = useState("");
   const [limit, setLimit] = useState(2);
   const [offset, setOffset] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
   // const [paginatedPokemonList, setPaginatedPokemonList] = useState([]);
 
   // const changeLimit = (limit) => {
@@ -37,7 +38,7 @@ function App() {
 
   // console.log(searchedPhrase);
 
-  const paginatedPokmonList = () => {
+  const paginatedPokemonList = () => {
     const filtered = filteredPokemonList.slice(offset, offset + limit);
     return filtered;
   };
@@ -50,6 +51,8 @@ function App() {
           handleSearch={handleSearch}
           limit={limit}
           setLimit={setLimit}
+          setOffset={setOffset}
+          setPageNumber={setPageNumber}
         />
       ),
       children: [
@@ -65,7 +68,11 @@ function App() {
               pokemonList={pokemonList}
               filteredPokemonList={filteredPokemonList}
               limit={limit}
-              paginatedPokmonList={paginatedPokmonList}
+              offset={offset}
+              setOffset={setOffset}
+              paginatedPokemonList={paginatedPokemonList}
+              pageNumber={pageNumber}
+              setPageNumber={setPageNumber}
             />
           ),
         },
@@ -87,7 +94,7 @@ function App() {
   };
 
   useEffect(() => {
-    console.log("BasePOkemonList");
+    // console.log("BasePOkemonList");
     getPokemonsList();
   }, []);
 
@@ -109,7 +116,7 @@ function App() {
       );
       setPokemonList(responses);
     };
-    console.log("PokemonList");
+    // console.log("PokemonList");
     getAllPokemons();
   }, [basePokemonList]);
 
@@ -150,7 +157,7 @@ function App() {
 
       // setFilteredPokemonList(pokemons);
       setFilteredPokemonList(pokemons);
-      console.log("filteringsearchedPokes");
+      // console.log("filteringsearchedPokes");
     }
   };
 
@@ -175,6 +182,10 @@ function App() {
   // useEffect(() => {
   //   setFilteredPokemonList(pokemons);
   // }, [pokemons]);
+
+  // const changeLimit = (limit) => {
+  //   setLimit(limit);
+  // };
 
   return <RouterProvider router={router} />;
 }

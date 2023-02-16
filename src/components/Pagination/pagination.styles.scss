@@ -1,0 +1,28 @@
+@import '../../utilities/variables';
+
+.pagination {
+  span {
+    font-size: 12px;
+
+
+    padding: 3px 10px;
+  }
+
+  span.pagination__button:hover {
+    text-decoration: underline;
+  }
+
+  .pagination__counter {
+    color: $brown;
+  }
+
+  .pagination__active {
+    color: $blue;
+    cursor: pointer;
+  }
+
+  .pagination__inactive {
+    color: $gray;
+    cursor: not-allowed;
+  }
+}

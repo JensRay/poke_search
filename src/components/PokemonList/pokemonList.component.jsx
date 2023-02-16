@@ -4,11 +4,18 @@ import { useState, useEffect, useCallback, useContext } from "react";
 import PokemonCard from "../PokemonCard/pokemon-card.component";
 import "./pokemonList.styles.scss";
 
+import Pagination from "../Pagination/pagination";
+
 const PokemonList = ({
   basePokemonList,
   pokemonList,
   filteredPokemonList,
-  paginatedPokmonList,
+  paginatedPokemonList,
+  limit,
+  offset,
+  setOffset,
+  pageNumber,
+  setPageNumber,
 }) => {
   // const [filter, setFilter] = useState("");
 
@@ -51,24 +58,6 @@ const PokemonList = ({
   // const [offset, setOffset] = useState(0);
   // const [limit, setLimit] = useState(20);
   // const [error, setError] = useState("");
-
-  // const changeLimit = (limit) => {
-  //   setLimit(limit);
-  // };
-
-  // console.log(searchedPhrase);
-
-  // const paginateNext = () => {
-  //   if (offset + limit < basePokemonList.length) {
-  //     setOffset(offset + limit);
-  //   }
-  // };
-
-  // const paginatePrev = () => {
-  //   if (offset - limit >= 0) {
-  //     setOffset(offset - limit);
-  //   }
-  // };
 
   //   const filterSearchedPokes = (searchPhrase) => {
   //     setFilter(searchPhrase);
@@ -184,35 +173,23 @@ const PokemonList = ({
       /> */}
       <div className="pokemon-list__container">
         <div className="pokemon-list__header">
-          {/* <div className="pagination">
-            <span
-              onClick={paginatePrev}
-              className={`${
-                offset + 1 > limit && "pagination__active"
-              } pagination__button`}
-            >
-              Previous page
-            </span>
-            <span className="pagination__counter">{`${offset + 1} / ${
-              offset + limit
-            }`}</span>
-            <span
-              onClick={paginateNext}
-              className={`${
-                offset < pokemonsList.length ? "pagination__active" : ""
-              } pagination__button`}
-            >
-              Next page
-            </span>
-          </div> */}
+          <Pagination
+            limit={limit}
+            offset={offset}
+            paginatedPokemonList={paginatedPokemonList}
+            setOffset={setOffset}
+            filteredPokemonList={filteredPokemonList}
+            pageNumber={pageNumber}
+            setPageNumber={setPageNumber}
+          />
           {/* <DarkMode /> */}
         </div>
         <div className="pokemon-list__grid">
           {filteredPokemonList ? (
             <div className="row">
               {
-                paginatedPokmonList().length !== 0
-                  ? paginatedPokmonList()?.map(
+                paginatedPokemonList().length !== 0
+                  ? paginatedPokemonList()?.map(
                       (pokemon) =>
                         pokemon.name && (
                           // .includes("bulba")
@@ -223,7 +200,7 @@ const PokemonList = ({
                           />
                         )
                     )
-                  : paginatedPokmonList()?.map(
+                  : paginatedPokemonList()?.map(
                       (pokemon) =>
                         pokemon.name && (
                           // .includes("bulba")

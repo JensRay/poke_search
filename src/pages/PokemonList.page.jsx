@@ -6,7 +6,12 @@ const PokemonListPage = ({
   basePokemonList,
   pokemonList,
   filteredPokemonList,
-  paginatedPokmonList,
+  paginatedPokemonList,
+  limit,
+  offset,
+  setOffset,
+  pageNumber,
+  setPageNumber,
 }) => {
   return (
     <div>
@@ -14,7 +19,12 @@ const PokemonListPage = ({
         basePokemonList={basePokemonList}
         pokemonList={pokemonList}
         filteredPokemonList={filteredPokemonList}
-        paginatedPokmonList={paginatedPokmonList}
+        paginatedPokemonList={paginatedPokemonList}
+        limit={limit}
+        offset={offset}
+        setOffset={setOffset}
+        pageNumber={pageNumber}
+        setPageNumber={setPageNumber}
       />
       {/* <Link to='/pokemons/:id'>Pokemon</Link> */}
     </div>
