@@ -11,8 +11,7 @@
   cursor: pointer;
   position: relative;
 
-  span {
-    color: $gray;
+  span:first-of-type {
     padding: 3px 7px;
     font-size: 12px;
     color: black;

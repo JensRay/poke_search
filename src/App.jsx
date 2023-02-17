@@ -108,7 +108,7 @@ function App() {
   const getPokemonsList = async () => {
     try {
       const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000`
+        `https://pokeapi.co/api/v2/pokemon?offset=0&limit=100`
       );
       const data = await response.json();
       setBasePokemonList(data.results);

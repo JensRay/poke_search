@@ -22,7 +22,11 @@ const Sorting = ({ sortingType, setSortingType, sortPokemons }) => {
     <div className="list__dropdown">
       <button className="list__dropdown__button" onClick={toggleList}>
         <span>Sort items</span>
-        {!isActive ? <span>&#65088;</span> : <span>&#65087;</span>}
+        {!isActive ? (
+          <span className="blue">&#65088;</span>
+        ) : (
+          <span className="blue">&#65087;</span>
+        )}
       </button>
       {isActive ? (
         <div className="list__dropdown-container" onClick={handleClick}>

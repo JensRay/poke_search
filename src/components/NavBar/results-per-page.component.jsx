@@ -32,7 +32,11 @@ const ResultsPerPage = ({ limit, setLimit, setOffset, setPageNumber }) =>
           onClick={toggleList}
         >
           <span>{`Showing ${limit} results`}</span>
-          {!isActive ? <span>&#65088;</span> : <span>&#65087;</span>}
+          {!isActive ? (
+            <span className="blue">&#65088;</span>
+          ) : (
+            <span className="blue">&#65087;</span>
+          )}
         </button>
         {isActive ? (
           <div
