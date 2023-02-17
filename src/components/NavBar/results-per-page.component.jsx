@@ -3,7 +3,7 @@ import "./results-per-page.styles.scss";
 
 // import PokemonContext from "../../context/PokemonContext";
 
-const ITEMS_PER_PAGE = [1, 2, 5];
+const ITEMS_PER_PAGE = [10, 20, 50];
 
 const ResultsPerPage = ({ limit, setLimit, setOffset, setPageNumber }) =>
   // { changeLimit, limit }

@@ -21,8 +21,9 @@ const PokemonCard = ({name, url}: { url: string; name: string; }) => {
       const data = await res.json()
       const weight = data.weight;
       const height = data.height;
+      // console.log(data.abilities)
       const abilities = data.abilities?.map(
-        (ability: { ability: { name: string; }; }) => ability.ability.name
+        (ability: { ability: { name: string; }; }, index: any) => ability.ability.name
       );
       setWeight(weight);
       setHeight(height);
@@ -30,6 +31,7 @@ const PokemonCard = ({name, url}: { url: string; name: string; }) => {
     }
     fetchData();
   }, [pokemonIndex, url]);
+
 
   return (
     <div className="pokemon-card__container">
@@ -51,8 +53,8 @@ const PokemonCard = ({name, url}: { url: string; name: string; }) => {
         <div className="pokemon-card__property">
           <span>Abilities:</span>
           <div className="pokemon-card__abilities">
-            {abilities?.map((ability) => (
-              <span key={ability}>{ability}</span>
+            {abilities?.map((ability,index) => (
+              <span key={index}>{ability}</span>
             ))}
           </div>
         </div>

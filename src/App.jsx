@@ -17,7 +17,7 @@ function App() {
   const [pokemonList, setPokemonList] = useState([]);
   const [filteredPokemonList, setFilteredPokemonList] = useState([]);
   const [error, setError] = useState("");
-  const [limit, setLimit] = useState(2);
+  const [limit, setLimit] = useState(20);
   const [offset, setOffset] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
   const [sortingType, setSortingType] = useState("");
@@ -108,7 +108,7 @@ function App() {
   const getPokemonsList = async () => {
     try {
       const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?offset=0&limit=10`
+        `https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000`
       );
       const data = await response.json();
       setBasePokemonList(data.results);
@@ -127,12 +127,14 @@ function App() {
         basePokemonList.map(async (pokemon) => {
           const res = await fetch(pokemon.url);
           const data = await res.json();
+
           return {
             // name: data.name,
             // url: `https://pokeapi.co/api/v2/pokemon/${data.id}`,
             ...pokemon,
             weight: data.weight,
             height: data.height,
+            id: `${data.name}${data.id}`,
           };
         })
       );
@@ -141,6 +143,8 @@ function App() {
 
     getAllPokemons();
   }, [basePokemonList]);
+
+  console.log(pokemonList);
 
   useEffect(() => {
     setFilteredPokemonList(pokemonList);
