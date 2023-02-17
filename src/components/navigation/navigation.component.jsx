@@ -13,6 +13,9 @@ const Navigation = ({
   setLimit,
   setOffset,
   setPageNumber,
+  setSortingType,
+  sortingType,
+  sortPokemons,
 }) =>
   // {changeLimit, filterSearchedPokes, limit}: { changeLimit: any; filterSearchedPokes: any; limit: number; }
   {
@@ -31,7 +34,11 @@ const Navigation = ({
               handleSearch={handleSearch}
               // filterSearchedPokes={filterSearchedPokes}
             />
-            <Sorting />
+            <Sorting
+              sortingType={sortingType}
+              setSortingType={setSortingType}
+              sortPokemons={sortPokemons}
+            />
           </div>
         </div>
       </Fragment>

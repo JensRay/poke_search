@@ -4,7 +4,7 @@ import "./sorting.styles.scss";
 
 const SORTING_TYPES = ["From A-Z", "From Z-A", "By Height", "By Weight"];
 
-const Sorting = ({}) => {
+const Sorting = ({ sortingType, setSortingType, sortPokemons }) => {
   const [isActive, setIsActive] = useState(false);
 
   const toggleList = () => {
@@ -13,8 +13,9 @@ const Sorting = ({}) => {
 
   const handleClick = ({ target }) => {
     const { value } = target;
-
+    setSortingType(value);
     setIsActive(false);
+    sortPokemons(value);
   };
 
   return (
@@ -30,8 +31,7 @@ const Sorting = ({}) => {
               <button
                 key={n}
                 value={n}
-                // className={
-                //   limit !== n ? "list__dropdown__active" : ""}
+                className={sortingType !== n ? "list__dropdown__active" : ""}
               >
                 {n}
               </button>

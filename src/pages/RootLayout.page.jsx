@@ -9,6 +9,9 @@ const RootLayout = ({
   setLimit,
   setOffset,
   setPageNumber,
+  sortingType,
+  setSortingType,
+  sortPokemons,
 }) => {
   return (
     <>
@@ -19,6 +22,9 @@ const RootLayout = ({
         setLimit={setLimit}
         setOffset={setOffset}
         setPageNumber={setPageNumber}
+        sortingType={sortingType}
+        setSortingType={setSortingType}
+        sortPokemons={sortPokemons}
       />
       <Outlet />
     </>
