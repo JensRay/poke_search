@@ -15,7 +15,7 @@
 @media only screen and (min-width: 768px) {
   .pokemon-list__container {
     margin: 1vw auto;
-    width: 70vw;
+    width: 73vw;
     .pokemon-list__header {
       justify-content: space-between;
       display: flex;
@@ -34,7 +34,8 @@
 .row {
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: 12px;
+  row-gap: 20px;
+  justify-items: center;
 }
 
 @media only screen and (min-width: 600px) {
@@ -43,7 +44,7 @@
   }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1024px) {
   .row {
     grid-template-columns: 1fr 1fr 1fr;
   }

@@ -59,12 +59,11 @@ const PokemonCard = ({name, url}: { url: string; name: string; }) => {
           </div>
         </div>
       </div>
-      <Link
-        className="pokemon-card__details-link"
-        to={`/pokemon/${pokemonIndex}`}
-      >
-        <div>See Details</div>
-      </Link>
+      <div className="pokemon-card__details-link">
+        <Link to={`/pokemon/${pokemonIndex}`}>
+          See Details
+        </Link>
+      </div>
     </div>
   );
 };
