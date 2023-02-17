@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -8,9 +8,6 @@ import {
 import RootLayoutPage from "./pages/RootLayout.page";
 import PokemonListPage from "./pages/PokemonList.page";
 import PokemonPage from "./pages/Pokemon.page";
-
-// import DisplayPokemonsContext from "./context/pokemonContext";
-// import PokemonProvider from './context/PokemonProvider';
 
 import "./App.css";
 
@@ -24,7 +21,6 @@ function App() {
   const [offset, setOffset] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
   const [sortingType, setSortingType] = useState("");
-  // const [paginatedPokemonList, setPaginatedPokemonList] = useState([]);
 
   const handleSearch = ({ target }) => {
     setSearchedPhrase(target.value.trim().toLowerCase());
@@ -56,7 +52,6 @@ function App() {
           (a, b) => a.weight - b.weight
         );
         setFilteredPokemonList(sortWeight);
-        console.log(type);
         break;
       default:
         console.log("Unknown Type");
@@ -143,7 +138,7 @@ function App() {
       );
       setPokemonList(responses);
     };
-    // console.log("PokemonList");
+
     getAllPokemons();
   }, [basePokemonList]);
 
@@ -157,9 +152,7 @@ function App() {
         pokemon.name.includes(searchedPhrase)
       );
 
-      // setFilteredPokemonList(pokemons);
       setFilteredPokemonList(pokemons);
-      // console.log("filteringsearchedPokes");
     }
   };
 
