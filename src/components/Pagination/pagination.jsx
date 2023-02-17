@@ -35,13 +35,13 @@ const Pagination = ({
       >
         Previous page
       </span>
-      <span className="pagination__counter">{`${pageNumber} / ${
+      <span className="pagination__counter">{`${pageNumber} / ${Math.ceil(
         filteredPokemonList.length / limit
-      }`}</span>
+      )}`}</span>
       <span
         onClick={paginateNext}
         className={`${
-          filteredPokemonList.length / limit !== pageNumber
+          Math.ceil(filteredPokemonList.length / limit) !== pageNumber
             ? "pagination__active"
             : "pagination__inactive"
         } pagination__button`}

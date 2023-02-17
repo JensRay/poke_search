@@ -144,8 +144,6 @@ function App() {
     getAllPokemons();
   }, [basePokemonList]);
 
-  console.log(pokemonList);
-
   useEffect(() => {
     setFilteredPokemonList(pokemonList);
   }, [pokemonList]);
