@@ -1,33 +1,32 @@
 @import '../../utilities/variables';
+@import url('https://css.gg/search.css');
 
-.search-bar__box {
+.search-bar {
+  order: 1;
+
+  .search-bar__box {
     position: relative;
 
-  .gg-search {
-    position: absolute;
-    top: 11px;
-    left: 10px;
-    color: $blue;
-  }
+    .gg-search {
+      position: absolute;
+      top: 11px;
+      left: 10px;
+      color: $blue;
+    }
 
-  input {
-    height: 30px;
-    width: 400px;
-    border: 1px solid $gray;
-    border-radius: 10px;
-    text-indent: 30px;
-    width: 200px;
+    input {
+      height: 30px;
+      width: 400px;
+      border: 1px solid $gray;
+      border-radius: 10px;
+      text-indent: 30px;
+      width: 200px;
+    }
   }
-}
-
-.sorting {
-  display: none;
 }
 
 @media only screen and (min-width: 768px) {
   .search-bar {
-    margin-left: 60px;
-
     .search-bar__box {
       input {
         width: 400px;
@@ -35,9 +34,9 @@
     }
   }
 }
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1201px) {
   .search-bar {
-    margin-left: 120px;
+    order: 0;
 
     .search-bar__box {
       input {
