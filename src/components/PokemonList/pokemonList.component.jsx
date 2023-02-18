@@ -4,7 +4,8 @@ import { useState, useEffect, useCallback, useContext } from "react";
 import PokemonCard from "../PokemonCard/pokemon-card.component";
 import "./pokemonList.styles.scss";
 
-import Pagination from "../Pagination/pagination";
+import Pagination from "../Pagination/pagination.component";
+import DarkMode from "../DarkMode/colorMode.component";
 
 const PokemonList = ({
   basePokemonList,
@@ -39,7 +40,7 @@ const PokemonList = ({
             pageNumber={pageNumber}
             setPageNumber={setPageNumber}
           />
-          {/* <DarkMode /> */}
+          <DarkMode />
         </div>
         <div className="pokemon-list__grid">
           {filteredPokemonList ? (

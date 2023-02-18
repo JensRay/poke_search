@@ -19,7 +19,7 @@
   font-size: 12px;
   font-weight: 600;
   padding: 8px 30px;
-  background-color: $blue;
+  background-color: $dark_blue;
   height: 30px;
   text-align: center;
   text-decoration: none;
@@ -33,15 +33,15 @@
 
 .pokemon-page__button-back:hover {
   background-color: white;
-  color: $blue;
+  color: $dark_blue;
   text-decoration: underline;
-  border: 1px solid $blue;
+  border: 1px solid $dark_blue;
   padding: 7px 29px;
   top: -1px;
 }
 
 .pokemon-page__main-img {
-  background-color: $blue;
+  background-color: $dark_blue;
   width: 400px;
   border-radius: 15px;
 }

@@ -19,8 +19,7 @@
     .pokemon-list__header {
       justify-content: space-between;
       display: flex;
-      justify-content: space-between;
-      margin: 1vw 0 1vw 26vw;
+      // margin: 1vw 0 1vw 26vw;
     }
   }
 }
@@ -34,7 +33,7 @@
 .row {
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: 20px;
+  row-gap: 35px;
   justify-items: center;
 }
 

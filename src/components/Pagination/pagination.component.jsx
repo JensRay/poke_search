@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import "./pagination.styles.scss";
 
 const Pagination = ({

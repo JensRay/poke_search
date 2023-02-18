@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
-import DarkMode from "../UI/dark-mode.component";
 import PropertiesDropdown from "../UI/properties-dropdown.component";
 import SuggestedItems from "../UI/suggested-items.component";
+import DarkMode from "../DarkMode/colorMode.component";
 
 import "./pokemon.styles.scss";
 

@@ -16,7 +16,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: $blue;
+  background-color: $dark_blue;
   img {
     height: 80%;
   }
@@ -57,18 +57,17 @@
 }
 
 .pokemon-card__details-link {
-
     border-top: 1px solid $gray;
-    color: $blue;
     padding: 0px 0;
     text-align: center;
     margin-top: 3px;
 
     a {
-        font-size: 12px;
-        font-weight: 600;
-        text-decoration: none;
-      }
+      color: $dark_blue;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+    }
 
 
   div:hover {
@@ -77,5 +76,5 @@
 }
 
 .pokemon-card__details-link:visited {
-  color: $blue;
+  color: $dark_blue;
 }

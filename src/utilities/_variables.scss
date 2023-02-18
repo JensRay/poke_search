@@ -1,7 +1,21 @@
-$blue: #367AAC;
-$gray: #DEDEDE;
-$brown: #4A4343;
+$brown: #4B4343;
+$dark_blue: #367AAC;
+$white: #FFFFFF;
+$light_gray: #E4E4E4;
+$dark_gray: #CCC;
+
+// light mode
+$light_blue: #138AE0;
+
+
+// dark mode
+$navy_blue: #1F374A;
+$light_brown: #707070;
+
+
 
 .blue {
-  color: $blue;
+  color: $dark_blue;
 }
+
+$gray: #CCC;
