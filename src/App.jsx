@@ -102,9 +102,9 @@ function App() {
             />
           ),
         },
-        { path: "/pokemon/:id", element: <PokemonPage /> },
       ],
     },
+    { path: "/pokemon/:id", element: <PokemonPage /> },
   ]);
 
   const getPokemonsList = async () => {
