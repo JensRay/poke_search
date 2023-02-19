@@ -1,8 +1,6 @@
 import { useState } from "react";
 import "./results-per-page.styles.scss";
 
-// import PokemonContext from "../../context/PokemonContext";
-
 const ITEMS_PER_PAGE = [10, 20, 50];
 
 const ResultsPerPage = ({ limit, setLimit, setOffset, setPageNumber }) =>
@@ -28,19 +26,19 @@ const ResultsPerPage = ({ limit, setLimit, setOffset, setPageNumber }) =>
     return (
       <div className="results-per-page">
         <button
-          className="results-per-page__dropdown__button"
+          className="results-per-page__dropdown__button box_shadow__theme inner_background__theme border__theme"
           onClick={toggleList}
         >
-          <span>{`Showing ${limit} results`}</span>
+          <span className="grayed_text__theme">{`Showing ${limit} results`}</span>
           {!isActive ? (
-            <span className="blue">&#65088;</span>
+            <span className="third_text__theme">&#65088;</span>
           ) : (
-            <span className="blue">&#65087;</span>
+            <span className="third_text__theme">&#65087;</span>
           )}
         </button>
         {isActive ? (
           <div
-            className="results-per-page__dropdown-container"
+            className="results-per-page__dropdown-container  box_shadow__theme inner_background__theme"
             onClick={handleClick}
           >
             {ITEMS_PER_PAGE.map((n) => {
@@ -48,7 +46,11 @@ const ResultsPerPage = ({ limit, setLimit, setOffset, setPageNumber }) =>
                 <button
                   key={n}
                   value={n}
-                  className={limit !== n ? "results-per-page__active" : ""}
+                  className={
+                    limit !== n
+                      ? "results-per-page__active text__theme inner_background__theme"
+                      : "grayed_text__theme inner_background__theme"
+                  }
                 >
                   Show {n} results
                 </button>

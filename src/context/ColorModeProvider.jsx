@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import PokemonContext from "./PokemonContext";
+import ColorModeContext from "./ColorModeContext";
 
 // // interface Props {children?: ReactNode}
 
@@ -10,11 +10,11 @@ import PokemonContext from "./PokemonContext";
 const PokemonProvider = ({ children }) => {
   const [colorMode, setColorMode] = useState("light");
   return (
-    <PokemonContext.Provider
+    <ColorModeContext.Provider
       value={{ colorMode: colorMode, setColorMode: setColorMode }}
     >
       {children}
-    </PokemonContext.Provider>
+    </ColorModeContext.Provider>
   );
 };
 

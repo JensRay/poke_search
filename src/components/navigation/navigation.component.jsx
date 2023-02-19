@@ -21,7 +21,7 @@ const Navigation = ({
   {
     return (
       <Fragment>
-        <div className="navigation-container">
+        <div className="navigation-container background__theme box_shadow__theme">
           <div className="navigation-bar">
             <ResultsPerPage
               setLimit={setLimit}

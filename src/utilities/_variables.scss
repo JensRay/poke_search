@@ -1,8 +1,8 @@
 $brown: #4B4343;
 $dark_blue: #367AAC;
 $white: #FFFFFF;
-$light_gray: #E4E4E4;
-$dark_gray: #CCC;
+$light_gray: #e4e4e4bc;
+$dark_gray: #797979;
 
 // light mode
 $light_blue: #138AE0;
@@ -19,3 +19,78 @@ $light_brown: #707070;
 }
 
 $gray: #CCC;
+
+.dark {
+  .text__theme {
+    color: white;
+  }
+  .grayed_text__theme {
+    color: $light_gray;
+  }
+
+  .third_text__theme {
+    color: white;
+  }
+
+  .background__theme {
+    background-color: $navy_blue;
+  }
+
+  .inner_background__theme {
+    background-color: $brown;
+  }
+
+  .box_shadow__theme {
+    box-shadow: 0px 0px 3px $white;
+  }
+
+  .border__theme {
+    border: 1px solid $brown;
+  }
+
+  .button__theme {
+    background-color: white;
+    color: $light_blue;
+  }
+
+}
+
+.light {
+  .text__theme {
+    color: black;
+  }
+
+  .grayed_text__theme {
+    color: $dark_gray;
+  }
+
+  .third_text__theme {
+    color: $light_blue;
+  }
+  .background__theme {
+    background-color: white;
+  }
+
+  .inner_background__theme {
+    background-color: white;
+  }
+
+  .box_shadow__theme {
+    box-shadow: 0px 0px 3px $gray;
+  }
+
+  .border__theme {
+    border: 1px solid $gray;
+  }
+
+  .button__theme {
+    background-color: $light_blue;
+    color: white ;
+  }
+}
+
+
+// * {
+//   padding: 0;
+//   margin: 0;
+// }

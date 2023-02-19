@@ -9,6 +9,8 @@ import RootLayoutPage from "./pages/RootLayout.page";
 import PokemonListPage from "./pages/PokemonList.page";
 import PokemonPage from "./pages/Pokemon.page";
 
+import ColorModeProvider from "./context/ColorModeProvider";
+
 import "./App.css";
 
 function App() {
@@ -108,7 +110,7 @@ function App() {
   const getPokemonsList = async () => {
     try {
       const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?offset=0&limit=100`
+        `https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000`
       );
       const data = await response.json();
       setBasePokemonList(data.results);
@@ -158,7 +160,11 @@ function App() {
     }
   };
 
-  return <RouterProvider router={router} />;
+  return (
+    <ColorModeProvider>
+      <RouterProvider router={router} />;
+    </ColorModeProvider>
+  );
 }
 
 export default App;

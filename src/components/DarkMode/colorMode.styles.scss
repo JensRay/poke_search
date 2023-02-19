@@ -2,10 +2,10 @@
 
 .color-mode__container {
   display: flex;
-  width: 200px;
+  justify-content: center;
+  order: 1;
 
   span:first-child {
-
     color: $dark_gray;
   }
 
@@ -13,12 +13,20 @@
     color: black;
   }
 
-span:last-child {
-  color: $dark_gray;
-}
+  span:last-child {
+    color: $dark_gray;
+  }
 
   span.active_dark {
     color: white;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .color-mode__container {
+    justify-content: space-around;
+    order: 2;
+    width: 200px;
   }
 }
 

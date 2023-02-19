@@ -28,20 +28,22 @@ const Pagination = ({
       <span
         onClick={paginatePrev}
         className={`${
-          offset + 1 > limit ? "pagination__active" : "pagination__inactive"
+          offset + 1 > limit
+            ? "pagination__active third_text__theme"
+            : "pagination__inactive grayed_text__theme"
         } pagination__button`}
       >
         Previous page
       </span>
-      <span className="pagination__counter">{`${pageNumber} / ${Math.ceil(
+      <span className="text__theme">{`${pageNumber} / ${Math.ceil(
         filteredPokemonList.length / limit
       )}`}</span>
       <span
         onClick={paginateNext}
         className={`${
           Math.ceil(filteredPokemonList.length / limit) !== pageNumber
-            ? "pagination__active"
-            : "pagination__inactive"
+            ? "pagination__active third_text__theme"
+            : "pagination__inactive grayed_text__theme"
         } pagination__button`}
       >
         Next page

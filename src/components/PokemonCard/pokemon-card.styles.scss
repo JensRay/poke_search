@@ -9,6 +9,7 @@
 }
 
 .pokemon-card__img {
+  border: 1px $light_gray solid;
   height: 180px;
   width: 180px;
   margin: auto;
@@ -75,6 +76,6 @@
   }
 }
 
-.pokemon-card__details-link:visited {
-  color: $dark_blue;
-}
+// .pokemon-card__details-link:visited {
+//   color: $dark_blue;
+// }

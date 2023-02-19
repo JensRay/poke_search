@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom";
+import { useContext } from "react";
 
 import Navigation from "../components/navigation/navigation.component";
+import ColorModeContext from "../context/ColorModeContext";
 
 const RootLayout = ({
   searchedPhrase,
@@ -13,8 +15,9 @@ const RootLayout = ({
   setSortingType,
   sortPokemons,
 }) => {
+  const { colorMode } = useContext(ColorModeContext);
   return (
-    <>
+    <div className={colorMode === "dark" ? "dark" : "light"}>
       <Navigation
         setSearchedPhrase={searchedPhrase}
         handleSearch={handleSearch}
@@ -27,7 +30,7 @@ const RootLayout = ({
         sortPokemons={sortPokemons}
       />
       <Outlet />
-    </>
+    </div>
   );
 };
 

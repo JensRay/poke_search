@@ -34,7 +34,7 @@ const PokemonCard = ({name, url}: { url: string; name: string; }) => {
 
 
   return (
-    <div className="pokemon-card__container">
+    <div className="pokemon-card__container text__theme inner_background__theme">
       <Link to={`/pokemon/${pokemonIndex}`}>
         <div className="pokemon-card__img">
           <img src={imageUrl} alt={name} />
@@ -43,7 +43,7 @@ const PokemonCard = ({name, url}: { url: string; name: string; }) => {
       <h3 className="pokemon-card__title">{name}</h3>
       <div className="pokemon-card__properties">
         <div className="pokemon-card__property">
-          <span>Height:</span>
+          <span className=''>Height:</span>
           <span>{height}</span>
         </div>
         <div className="pokemon-card__property">
@@ -60,7 +60,7 @@ const PokemonCard = ({name, url}: { url: string; name: string; }) => {
         </div>
       </div>
       <div className="pokemon-card__details-link">
-        <Link to={`/pokemon/${pokemonIndex}`}>
+        <Link to={`/pokemon/${pokemonIndex}`} className="third_text__theme">
           See Details
         </Link>
       </div>

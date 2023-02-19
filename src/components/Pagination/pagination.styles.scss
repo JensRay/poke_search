@@ -1,10 +1,9 @@
 @import '../../utilities/variables';
 
 .pagination {
+  order: 2;
   span {
     font-size: 12px;
-
-
     padding: 3px 10px;
   }
 
@@ -12,17 +11,17 @@
     text-decoration: underline;
   }
 
-  .pagination__counter {
-    color: $brown;
-  }
-
   .pagination__active {
-    color: $dark_blue;
     cursor: pointer;
   }
 
   .pagination__inactive {
-    color: $gray;
     cursor: not-allowed;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .pagination {
+    order: 1;
   }
 }

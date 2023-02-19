@@ -1,8 +1,9 @@
 @import '../../utilities/variables';
 
 .pokemon-page {
-  margin: 20px auto;
-  width: 1000px;;
+  margin: 0 auto;
+  padding-top: 20px;
+  width: 1000px;
 }
 
 .pokemon-page__heading {
@@ -19,7 +20,7 @@
   font-size: 12px;
   font-weight: 600;
   padding: 8px 30px;
-  background-color: $dark_blue;
+  // background-color: $dark_blue;
   height: 30px;
   text-align: center;
   text-decoration: none;

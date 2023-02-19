@@ -15,12 +15,12 @@ const PropertiesDropdown = (props: { title: string; children?: React.ReactNode; 
 
   return (
     <div className="properties-dropdown">
-      <button className="properties-dropdown__button" onClick={handleClick}>
-        <span>{props.title}</span>
-        {!isActive ? <span>&#65088;</span> : <span>&#65087;</span>}
+      <button className="properties-dropdown__button inner_background__theme" onClick={handleClick}>
+        <span className="text__theme">{props.title}</span>
+        {!isActive ? <span className="third_text__theme">&#65088;</span> : <span className="third_text__theme">&#65087;</span>}
       </button>
       {isActive ? (
-        <div className="properties-dropdown__container">{props.children}</div>
+        <div className="properties-dropdown__container inner_background__theme text__theme">{props.children}</div>
       ) : (
         ""
       )}

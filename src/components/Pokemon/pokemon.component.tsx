@@ -76,10 +76,11 @@ const PokemonPage = () => {
   }, [id, pokemonIndex]);
 
   return (
-    <div className="pokemon-page">
+    <div className="pokemon-background background__theme">
+    <div className="pokemon-page ">
       <div className="pokemon-page__heading">
-        <div className="pokemon-page__heading-side-box">
-          <Link className="pokemon-page__button-back" to='/'
+        <div className="pokemon-page__heading-side-box ">
+          <Link className="pokemon-page__button-back button__theme" to='/'
           // onClick={handleClickBack}
           >
             &#10094; Back
@@ -92,9 +93,9 @@ const PokemonPage = () => {
           <DarkMode />
         </div>
       </div>
-      <h2 className="pokemon-page__title">{name.toUpperCase()}</h2>
-      <div className="pokemon-page__pokemon-main-properties">
-        <span>Height: {height}</span>
+      <h2 className="pokemon-page__title text__theme">{name.toUpperCase()}</h2>
+      <div className="pokemon-page__pokemon-main-properties text__theme">
+        <span className="">Height: {height}</span>
         <span>Weight: {weight}</span>
         <span>Base experience: {baseExperience}</span>
         <span>Default: {isDefault.toString()}</span>
@@ -114,6 +115,7 @@ const PokemonPage = () => {
         <PropertiesDropdown title={"Moves"} />
       </div>
       <SuggestedItems pokemonIndex={pokemonIndex} />
+    </div>
     </div>
   );
 };
