@@ -12,7 +12,7 @@ function capitalize(w: string) {
   return w[0].toUpperCase() + w.slice(1);
 }
 
-const PokemonPage = () => {
+const Pokemon = () => {
   const [url, setUrl] = useState<string | number>("");
   const [name, setName] = useState<string>("");
   const [pokemonIndex, setPokemonIndex] = useState<number>(0);
@@ -120,4 +120,4 @@ const PokemonPage = () => {
   );
 };
 
-export default PokemonPage;
+export default Pokemon;
