@@ -1,10 +1,8 @@
 # Poke Search
 
-## React API app 
+## React API app build by *Jedrzej Lagodzinski*, deployed on Netlify:
 
-(Pokemons)[https://pokemon-search-react-api.netlify.app/pokemons]
-
-
+https://pokemon-search-react-api.netlify.app/pokemons
 
 ## Functionality:
 - Search for API items
