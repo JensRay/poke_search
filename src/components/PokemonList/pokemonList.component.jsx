@@ -1,17 +1,10 @@
-import { useState, useEffect, useCallback, useContext } from "react";
-
-// import DarkMode from "../UI/dark-mode.component";
 import PokemonCard from "../PokemonCard/pokemon-card.component";
-import "./pokemonList.styles.scss";
-
 import Pagination from "../Pagination/pagination.component";
 import DarkMode from "../DarkMode/colorMode.component";
-import PokemonProvider from "../../context/ColorModeProvider";
-import ColorModeContext from "../../context/ColorModeContext";
+
+import "./pokemonList.styles.scss";
 
 const PokemonList = ({
-  basePokemonList,
-  pokemonList,
   filteredPokemonList,
   paginatedPokemonList,
   limit,
@@ -39,7 +32,6 @@ const PokemonList = ({
           <Pagination
             limit={limit}
             offset={offset}
-            paginatedPokemonList={paginatedPokemonList}
             setOffset={setOffset}
             filteredPokemonList={filteredPokemonList}
             pageNumber={pageNumber}

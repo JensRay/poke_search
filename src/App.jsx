@@ -18,7 +18,7 @@ function App() {
   const [basePokemonList, setBasePokemonList] = useState([]);
   const [pokemonList, setPokemonList] = useState([]);
   const [filteredPokemonList, setFilteredPokemonList] = useState([]);
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const [limit, setLimit] = useState(20);
   const [offset, setOffset] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
@@ -115,7 +115,8 @@ function App() {
       const data = await response.json();
       setBasePokemonList(data.results);
     } catch (error) {
-      setError(error);
+      // setError(error);
+      console.log(error);
     }
   };
 

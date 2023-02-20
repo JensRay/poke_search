@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import PropertiesDropdown from "../UI/properties-dropdown.component";
 import SuggestedItems from "../UI/suggested-items.component";
@@ -13,7 +13,7 @@ function capitalize(w: string) {
 }
 
 const Pokemon = () => {
-  const [url, setUrl] = useState<string | number>("");
+  // const [url, setUrl] = useState<string | number>("");
   const [name, setName] = useState<string>("");
   const [pokemonIndex, setPokemonIndex] = useState<number>(0);
   const [imageUrl, setImageUrl] = useState<string>("");
@@ -43,7 +43,7 @@ const Pokemon = () => {
     setPokemonIndex(Number(id));
     async function fetchData() {
       const url = `https://pokeapi.co/api/v2/pokemon/${pokemonIndex}`;
-      setUrl(url);
+      // setUrl(url);
       const imageUrl: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIndex}.png`;
       const res = await axios.get(url);
       const data = res.data;

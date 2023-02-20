@@ -3,7 +3,6 @@ import "./pagination.styles.scss";
 const Pagination = ({
   offset,
   limit,
-  paginatedPokemonList,
   setOffset,
   filteredPokemonList,
   pageNumber,
