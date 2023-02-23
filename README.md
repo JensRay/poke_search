@@ -13,6 +13,7 @@ https://pokemon-search-react-api.netlify.app/pokemons
 
 ## Technologies:
 - React (useState, useContext, useEffect, react-router-dom)
+- TypeScript
 - JavaScript
 - SCSS
 - HTML
