@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 import "./pokemon-card.styles.scss";
 
-const PokemonCard = ({name, url}: { url: string; name: string; }) => {
-  const [pokemonIndex, setPokemonIndex] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
-  const [abilities, setAbilities] = useState([]);
+const PokemonCard: React.FC<{ url: string; name: string; }> = ({name, url} ) => {
+  const [pokemonIndex, setPokemonIndex] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>("");
+  const [weight, setWeight] = useState<string>("");
+  const [height, setHeight] = useState<string>("");
+  const [abilities, setAbilities] = useState<string[]>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -21,7 +21,6 @@ const PokemonCard = ({name, url}: { url: string; name: string; }) => {
       const data = await res.json()
       const weight = data.weight;
       const height = data.height;
-      // console.log(data.abilities)
       const abilities = data.abilities?.map(
         (ability: { ability: { name: string; }; }, index: any) => ability.ability.name
       );

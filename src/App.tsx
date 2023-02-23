@@ -13,23 +13,35 @@ import ColorModeProvider from "./context/ColorModeProvider";
 
 import "./App.css";
 
-function App() {
-  const [searchedPhrase, setSearchedPhrase] = useState("");
-  const [basePokemonList, setBasePokemonList] = useState([]);
-  const [pokemonList, setPokemonList] = useState([]);
-  const [filteredPokemonList, setFilteredPokemonList] = useState([]);
-  // const [error, setError] = useState("");
-  const [limit, setLimit] = useState(20);
-  const [offset, setOffset] = useState(0);
-  const [pageNumber, setPageNumber] = useState(1);
-  const [sortingType, setSortingType] = useState("");
+import { BasePokemonType, SearchPokemonType } from './@types/types'
 
-  const handleSearch = ({ target }) => {
-    setSearchedPhrase(target.value.trim().toLowerCase());
-    filterSearchedPokemons(target.value.trim().toLowerCase());
+const App: React.FC = () =>  {
+  const [offset, setOffset] = useState<number>(0);
+  const [limit, setLimit] = useState<number>(20);
+  const [searchedPhrase, setSearchedPhrase] = useState<string>("");
+  const [basePokemonList, setBasePokemonList] = useState<BasePokemonType[]>([]);
+  const [pokemonList, setPokemonList] = useState<SearchPokemonType[] | []>([]);
+  const [filteredPokemonList, setFilteredPokemonList] = useState<SearchPokemonType[]>([]);
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [sortingType, setSortingType] = useState<string>('');
+
+  const filterSearchedPokemons = (searchedPhrase: string) => {
+    if (searchedPhrase !== "") {
+      const pokemons = pokemonList.filter((pokemon) =>
+        pokemon.name.includes(searchedPhrase)
+      );
+
+      setFilteredPokemonList(pokemons);
+    }
   };
 
-  const sortPokemons = (type) => {
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+    setSearchedPhrase(value.trim().toLowerCase());
+    filterSearchedPokemons(value.trim().toLowerCase());
+  };
+
+  const sortPokemons = (type:string) => {
     switch (type) {
       case "From A-Z":
         const sortA_Z = filteredPokemonList.sort((a, b) =>
@@ -60,7 +72,7 @@ function App() {
     }
   };
 
-  const paginatedPokemonList = () => {
+  const paginatedPokemonList = ():SearchPokemonType[] => {
     const filtered = filteredPokemonList.slice(offset, offset + limit);
     return filtered;
   };
@@ -71,12 +83,12 @@ function App() {
       element: (
         <RootLayoutPage
           searchedPhrase={searchedPhrase}
+          sortingType={sortingType}
           handleSearch={handleSearch}
           limit={limit}
           setLimit={setLimit}
           setOffset={setOffset}
           setPageNumber={setPageNumber}
-          sortingType={sortingType}
           setSortingType={setSortingType}
           sortPokemons={sortPokemons}
         />
@@ -96,9 +108,9 @@ function App() {
               limit={limit}
               offset={offset}
               setOffset={setOffset}
-              paginatedPokemonList={paginatedPokemonList}
               pageNumber={pageNumber}
               setPageNumber={setPageNumber}
+              paginatedPokemonList={paginatedPokemonList}
             />
           ),
         },
@@ -132,8 +144,6 @@ function App() {
           const data = await res.json();
 
           return {
-            // name: data.name,
-            // url: `https://pokeapi.co/api/v2/pokemon/${data.id}`,
             ...pokemon,
             weight: data.weight,
             height: data.height,
@@ -151,15 +161,7 @@ function App() {
     setFilteredPokemonList(pokemonList);
   }, [pokemonList]);
 
-  const filterSearchedPokemons = (searchedPhrase) => {
-    if (searchedPhrase !== "") {
-      const pokemons = pokemonList.filter((pokemon) =>
-        pokemon.name.includes(searchedPhrase)
-      );
 
-      setFilteredPokemonList(pokemons);
-    }
-  };
 
   return (
     <ColorModeProvider>

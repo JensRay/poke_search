@@ -6,7 +6,17 @@ import Sorting from "../NavBar/sorting.component";
 
 import "./navigation.styles.scss";
 
-const Navigation = ({
+const Navigation: React.FC<{
+  searchedPhrase: string,
+  handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  limit: number,
+  setLimit: React.Dispatch<React.SetStateAction<number>>,
+  setOffset: React.Dispatch<React.SetStateAction<number>>,
+  setPageNumber: React.Dispatch<React.SetStateAction<number>>,
+  setSortingType: React.Dispatch<React.SetStateAction<string>>,
+  sortingType: string,
+  sortPokemons: (value: string) => void,
+}> = ({
   searchedPhrase,
   handleSearch,
   limit,
@@ -17,7 +27,6 @@ const Navigation = ({
   sortingType,
   sortPokemons,
 }) =>
-  // {changeLimit, filterSearchedPokes, limit}: { changeLimit: any; filterSearchedPokes: any; limit: number; }
   {
     return (
       <Fragment>
@@ -30,9 +39,8 @@ const Navigation = ({
               setPageNumber={setPageNumber}
             />
             <SearchBar
-              setSearchedPhrase={searchedPhrase}
+              searchedPhrase={searchedPhrase}
               handleSearch={handleSearch}
-              // filterSearchedPokes={filterSearchedPokes}
             />
             <Sorting
               sortingType={sortingType}

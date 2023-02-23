@@ -4,12 +4,12 @@ import ColorModeContext from "../../context/ColorModeContext";
 
 import "./colorMode.styles.scss";
 
-const DarkMode = () => {
-  const { colorMode, setColorMode } = useContext(ColorModeContext);
-  const [isActive, setIsActive] = useState(false);
+const DarkMode: React.FC = () => {
+  const { colorMode, setColorMode }: {colorMode: string, setColorMode: React.Dispatch<React.SetStateAction<string>>} = useContext(ColorModeContext);
+  const [isActive, setIsActive] = useState<boolean>(false);
 
   const toggleColorHandle = () => {
-    setIsActive(!isActive);
+    setIsActive((isActive) => !isActive);
     setColorMode(colorMode === "light" ? "dark" : "light");
   };
   return (

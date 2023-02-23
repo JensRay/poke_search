@@ -1,6 +1,13 @@
 import "./pagination.styles.scss";
 
-const Pagination = ({
+const Pagination: React.FC<{
+  offset: number
+  limit: number,
+  setOffset: React.Dispatch<React.SetStateAction<number>>,
+  filteredPokemonList: {}[],
+  pageNumber: number,
+  setPageNumber: React.Dispatch<React.SetStateAction<number>>,
+}> = ({
   offset,
   limit,
   setOffset,

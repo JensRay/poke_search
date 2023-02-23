@@ -4,7 +4,15 @@ import DarkMode from "../DarkMode/colorMode.component";
 
 import "./pokemonList.styles.scss";
 
-const PokemonList = ({
+import { SearchPokemonType } from '../../@types/types'
+
+const PokemonList: React.FC<{filteredPokemonList:{}[],
+  paginatedPokemonList: () => SearchPokemonType[],
+  limit: number,
+  offset: number,
+  setOffset: React.Dispatch<React.SetStateAction<number>>,
+  pageNumber: number,
+  setPageNumber: React.Dispatch<React.SetStateAction<number>>}> = ({
   filteredPokemonList,
   paginatedPokemonList,
   limit,
@@ -13,16 +21,6 @@ const PokemonList = ({
   pageNumber,
   setPageNumber,
 }) => {
-  // const { colorMode } = useContext(ColorModeContext);
-
-  // const [filteredPokemonList, setFilterPokemonsList] = useState(() => {});
-
-  // // type Pokemon = {name: string, url: string}
-
-  //   // const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  //   // const [filter, setFilter] = useState<string>("");
-  //   // const [offset, setOffset] = useState<number>(0);
-  //   // const [limit, setLimit] = useState<number>(20);
 
   return (
     <div className="main-container background__theme">
@@ -43,12 +41,12 @@ const PokemonList = ({
           {filteredPokemonList ? (
             <div className="row">
               {paginatedPokemonList()?.map(
-                (pokemon) =>
-                  pokemon.name && (
+                ({id, name, url}:{id:string, name: string, url: string }) =>
+                  name && (
                     <PokemonCard
-                      key={pokemon.id}
-                      name={pokemon.name}
-                      url={pokemon.url}
+                      key={id}
+                      name={name}
+                      url={url}
                     />
                   )
               )}

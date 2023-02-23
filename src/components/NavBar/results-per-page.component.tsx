@@ -3,21 +3,17 @@ import "./results-per-page.styles.scss";
 
 const ITEMS_PER_PAGE = [10, 20, 50];
 
-const ResultsPerPage = ({ limit, setLimit, setOffset, setPageNumber }) =>
-  // { changeLimit, limit }
+const ResultsPerPage: React.FC<{limit: number, setLimit: React.Dispatch<React.SetStateAction<number>>, setOffset: React.Dispatch<React.SetStateAction<number>>, setPageNumber: React.Dispatch<React.SetStateAction<number>> }> = ({ limit, setLimit, setOffset, setPageNumber }) =>
   {
-    const [isActive, setIsActive] = useState(false);
-    // const [changeLimit, limit] = useState(20);
-
-    // console.log(limit);
+    const [isActive, setIsActive] = useState<boolean>(false);
 
     const toggleList = () => {
-      setIsActive(!isActive);
+      setIsActive((isActive) => !isActive);
     };
 
-    const handleClick = ({ target }) => {
+    const handleClick = ({currentTarget}: React.MouseEvent<HTMLButtonElement>) : void => {
       setOffset(0);
-      const { value } = target;
+      const value: string = currentTarget.value;
       setLimit(parseInt(value));
       setIsActive(false);
       setPageNumber(1);
@@ -39,11 +35,11 @@ const ResultsPerPage = ({ limit, setLimit, setOffset, setPageNumber }) =>
         {isActive ? (
           <div
             className="results-per-page__dropdown-container  box_shadow__theme inner_background__theme"
-            onClick={handleClick}
-          >
+            >
             {ITEMS_PER_PAGE.map((n) => {
               return (
                 <button
+                  onClick={handleClick}
                   key={n}
                   value={n}
                   className={

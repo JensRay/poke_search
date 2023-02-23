@@ -4,15 +4,15 @@ import "./sorting.styles.scss";
 
 const SORTING_TYPES = ["From A-Z", "From Z-A", "By Height", "By Weight"];
 
-const Sorting = ({ sortingType, setSortingType, sortPokemons }) => {
-  const [isActive, setIsActive] = useState(false);
+const Sorting:React.FC<{ sortingType: string, setSortingType: React.Dispatch<React.SetStateAction<string>>, sortPokemons: (value: string) => void }> = ({ sortingType, setSortingType, sortPokemons }) => {
+  const [isActive, setIsActive] = useState<boolean>(false);
 
   const toggleList = () => {
-    setIsActive(!isActive);
+    setIsActive((isActive) => !isActive);
   };
 
-  const handleClick = ({ target }) => {
-    const { value } = target;
+  const handleClick = ( { currentTarget }: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    const value = currentTarget.value;
     setSortingType(value);
     setIsActive(false);
     sortPokemons(value);
@@ -34,11 +34,12 @@ const Sorting = ({ sortingType, setSortingType, sortPokemons }) => {
       {isActive ? (
         <div
           className="list__dropdown-container box_shadow__theme inner_background__theme"
-          onClick={handleClick}
-        >
+
+          >
           {SORTING_TYPES.map((n) => {
             return (
               <button
+                onClick={handleClick}
                 key={n}
                 value={n}
                 className={

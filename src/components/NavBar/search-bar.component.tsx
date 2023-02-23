@@ -1,8 +1,6 @@
-// import { useState } from "react";
-
 import "./search-bar.styles.scss";
 
-const SearchBar = ({ handleSearch, searchedPhrase }) => {
+const SearchBar:React.FC<{handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void, searchedPhrase: string}> = ({ handleSearch, searchedPhrase }) => {
   return (
     <div className="search-bar">
       <div className="search-bar__box">

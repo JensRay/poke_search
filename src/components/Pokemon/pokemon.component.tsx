@@ -12,8 +12,7 @@ function capitalize(w: string) {
   return w[0].toUpperCase() + w.slice(1);
 }
 
-const Pokemon = () => {
-  // const [url, setUrl] = useState<string | number>("");
+const Pokemon: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [pokemonIndex, setPokemonIndex] = useState<number>(0);
   const [imageUrl, setImageUrl] = useState<string>("");
@@ -24,20 +23,7 @@ const Pokemon = () => {
   const [order, setOrder] = useState<number>(0);
   const [species, setSpecies] = useState<string>("");
   const [abilities, setAbilities] = useState<string[]>([]);
-  // const [form, setForm] = useState("");
-  // const [types, setTypes] = useState([]);
-  // const [gameIndices, setGameIndices] = useState([]);
-  // const [stats, setStats] = useState([]);
-  // const [moves, setMoves] = useState([]);
-
   const { id } = useParams();
-  // let navigate = useNavigate();
-
-  // const handleClickBack = () => {
-  //   navigate(-1);
-  // };
-
-  console.log(pokemonIndex)
 
   useEffect(() => {
     setPokemonIndex(Number(id));
@@ -56,10 +42,6 @@ const Pokemon = () => {
       const species:string = data.species.name;
       const abilities = data.abilities?.map((ability: { ability: { name: string; }; }) => ability.ability.name);
       // const form = data.forms.name;
-      // const abilities = data.abilities?.map((ability) => ability.ability.name);
-      // const abilities = data.abilities?.map((ability) => ability.ability.name);
-      // const abilities = data.abilities?.map((ability) => ability.ability.name);
-      // const abilities = data.abilities?.map((ability) => ability.ability.name);
 
       setName(name);
       setImageUrl(imageUrl);
@@ -81,7 +63,6 @@ const Pokemon = () => {
       <div className="pokemon-page__heading">
         <div className="pokemon-page__heading-side-box ">
           <Link className="pokemon-page__button-back button__theme" to='/'
-          // onClick={handleClickBack}
           >
             &#10094; Back
           </Link>
