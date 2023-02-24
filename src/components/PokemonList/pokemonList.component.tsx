@@ -41,12 +41,13 @@ const PokemonList: React.FC<{filteredPokemonList:{}[],
           {filteredPokemonList ? (
             <div className="row">
               {paginatedPokemonList()?.map(
-                ({id, name, url}:{id:string, name: string, url: string }) =>
+                ({id, name, url}:{id:number, name: string, url: string }) =>
                   name && (
                     <PokemonCard
                       key={id}
                       name={name}
                       url={url}
+                      id={id}
                     />
                   )
               )}

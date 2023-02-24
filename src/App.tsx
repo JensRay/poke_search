@@ -147,7 +147,7 @@ const App: React.FC = () =>  {
             ...pokemon,
             weight: data.weight,
             height: data.height,
-            id: `${data.name}${data.id}`,
+            id: data.id,
           };
         })
       );

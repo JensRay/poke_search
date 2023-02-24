@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "./pokemon-card.styles.scss";
 
-const PokemonCard: React.FC<{ url: string; name: string; }> = ({name, url} ) => {
+const PokemonCard: React.FC<{ url: string; name: string; id: number}> = ({name, url, id} ) => {
   const [pokemonIndex, setPokemonIndex] = useState<string>();
   const [imageUrl, setImageUrl] = useState<string>();
   const [weight, setWeight] = useState<string>("");
@@ -13,9 +13,9 @@ const PokemonCard: React.FC<{ url: string; name: string; }> = ({name, url} ) => 
   useEffect(() => {
     async function fetchData() {
       try {
-        setPokemonIndex(url!.split("/")[url!.split("/").length - 2]);
+        setPokemonIndex(id.toString());
         setImageUrl(
-          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIndex!}.png`
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
           );
 
           const res = await fetch(url);
@@ -33,7 +33,7 @@ const PokemonCard: React.FC<{ url: string; name: string; }> = ({name, url} ) => 
           }
     }
     fetchData();
-  }, [pokemonIndex, url]);
+  }, [id, pokemonIndex, url]);
 
 
   return (
