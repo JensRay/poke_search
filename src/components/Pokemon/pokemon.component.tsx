@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+
 import { useParams, Link } from "react-router-dom";
 
 import PropertiesDropdown from "../UI/properties-dropdown.component";
 import SuggestedItems from "../UI/suggested-items.component";
 import DarkMode from "../DarkMode/colorMode.component";
+
+import { PokemonProperties } from "../../@types/types";
 
 import "./pokemon.styles.scss";
 
@@ -29,26 +31,18 @@ const Pokemon: React.FC = () => {
     setPokemonIndex(Number(id));
     async function fetchData() {
       const url = `https://pokeapi.co/api/v2/pokemon/${pokemonIndex}`;
-      // setUrl(url);
-      const imageUrl: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIndex}.png`;
-      const res = await axios.get(url);
-      const data = res.data;
-      const name: string = data.name;
-      const weight: number = data.weight;
-      const height:number = data.height;
-      const baseExperience: number = data.base_experience;
-      const isDefault: boolean = data.is_default;
-      const order: number = data.order;
-      const species:string = data.species.name;
-      const abilities = data.abilities?.map((ability: { ability: { name: string; }; }) => ability.ability.name);
-      // const form = data.forms.name;
+      const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIndex}.png`;
+      const response = await fetch(url);
+      const data = await response.json();
+      const {name, weight, height, base_experience, is_default, order, species}: PokemonProperties = data.results
+      const abilities = data.results.abilities?.map((ability: { ability: { name: string; }; }) => ability.ability.name);
 
       setName(name);
       setImageUrl(imageUrl);
       setWeight(weight);
       setHeight(height);
-      setBaseExperience(baseExperience);
-      setIsDefault(isDefault);
+      setBaseExperience(base_experience);
+      setIsDefault(is_default);
       setOrder(order);
       setSpecies(capitalize(species));
       setAbilities(abilities);
