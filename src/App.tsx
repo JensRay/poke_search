@@ -20,7 +20,7 @@ const App: React.FC = () =>  {
   const [limit, setLimit] = useState<number>(20);
   const [searchedPhrase, setSearchedPhrase] = useState<string>("");
   const [basePokemonList, setBasePokemonList] = useState<BasePokemonType[]>([]);
-  const [pokemonList, setPokemonList] = useState<SearchPokemonType[] | []>([]);
+  const [pokemonList, setPokemonList] = useState<SearchPokemonType[]>([]);
   const [filteredPokemonList, setFilteredPokemonList] = useState<SearchPokemonType[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [sortingType, setSortingType] = useState<string>('');
@@ -116,7 +116,7 @@ const App: React.FC = () =>  {
         },
       ],
     },
-    { path: "/pokemon/:id", element: <PokemonPage /> },
+    { path: "/pokemon/:id", element: <PokemonPage filteredPokemonList={filteredPokemonList}/> },
   ]);
 
   const getPokemonsList = async () => {
@@ -125,6 +125,7 @@ const App: React.FC = () =>  {
         `https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000`
       );
       const data = await response.json();
+
       setBasePokemonList(data.results);
     } catch (error) {
       // setError(error);

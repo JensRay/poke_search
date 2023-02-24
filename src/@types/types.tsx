@@ -1,11 +1,10 @@
 export type BasePokemonType = {
-  id: number;
   name: string;
   url: string;
 }
 
 export type SearchPokemonType = {
-  id: number;
+  id: string;
   name: string;
   weight: number;
   height: number;

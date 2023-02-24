@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "./pokemon-card.styles.scss";
 
-const PokemonCard: React.FC<{ url: string; name: string; id: number}> = ({name, url, id} ) => {
+const PokemonCard: React.FC<{ url: string; name: string; id: string}> = ({name, url, id} ) => {
   const [pokemonIndex, setPokemonIndex] = useState<string>();
   const [imageUrl, setImageUrl] = useState<string>();
   const [weight, setWeight] = useState<string>("");
@@ -23,6 +23,7 @@ const PokemonCard: React.FC<{ url: string; name: string; id: number}> = ({name, 
           const weight = data.weight;
           const height = data.height;
           const abilities = data.abilities?.map(
+            // remove index
             (ability: { ability: { name: string; }; }, index: any) => ability.ability.name
             );
             setWeight(weight);

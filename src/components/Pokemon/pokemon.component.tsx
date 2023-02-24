@@ -6,15 +6,16 @@ import PropertiesDropdown from "../UI/properties-dropdown.component";
 import SuggestedItems from "../UI/suggested-items.component";
 import DarkMode from "../DarkMode/colorMode.component";
 
-import { PokemonProperties } from "../../@types/types";
+import { PokemonProperties, SearchPokemonType } from '../../@types/types';
 
 import "./pokemon.styles.scss";
 
-function capitalize(w: string) {
+const capitalize = (w: string) => {
   return w[0].toUpperCase() + w.slice(1);
 }
+const PROPERTIES_DROPDOWN = ['Form','Types', 'Game Indices', 'Stats', 'Moves' ]
 
-const Pokemon: React.FC = () => {
+const Pokemon: React.FC<{filteredPokemonList: SearchPokemonType[]}> = ({filteredPokemonList}) => {
   const [name, setName] = useState<string>("");
   const [pokemonIndex, setPokemonIndex] = useState<string>('1');
   const [imageUrl, setImageUrl] = useState<string>("");
@@ -25,21 +26,22 @@ const Pokemon: React.FC = () => {
   const [order, setOrder] = useState<number>(0);
   const [species, setSpecies] = useState<string>("");
   const [abilities, setAbilities] = useState<string[]>([]);
+  const [url, setUrl] = useState<string>('')
 
-  const id:string  = useParams().id as string;
+  const id  = useParams().id as string
 
   useEffect(() => {
     async function fetchData() {
       try {
         setPokemonIndex(id)
-        const url: string = `https://pokeapi.co/api/v2/pokemon/${pokemonIndex!}`;
+        setUrl(`https://pokeapi.co/api/v2/pokemon/${pokemonIndex!}`);
         const imageUrl:string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIndex!}.png`;
         const response = await fetch(url);
         const data = await response.json();
         const {name, weight, height, base_experience, is_default, order}: PokemonProperties = data
         const species= data.species.name
         const abilities = data.abilities?.map((ability: { ability: { name: string; }; }) => ability.ability.name);
-        // setUrl(url)
+
         setName(name);
         setImageUrl(imageUrl);
         setWeight(weight);
@@ -54,7 +56,7 @@ const Pokemon: React.FC = () => {
       // setForm(form);
     }
       fetchData();
-  }, [id, pokemonIndex]);
+  }, [id, pokemonIndex, url]);
 
   return (
     <div className="pokemon-background background__theme">
@@ -88,13 +90,9 @@ const Pokemon: React.FC = () => {
             <li key={ability}>{ability}</li>
           ))}
         </PropertiesDropdown>
-        <PropertiesDropdown title={"Form"} />
-        <PropertiesDropdown title={"Types"} />
-        <PropertiesDropdown title={"Game Indices"} />
-        <PropertiesDropdown title={"Stats"} />
-        <PropertiesDropdown title={"Moves"} />
+       {PROPERTIES_DROPDOWN.map(property =>  <PropertiesDropdown title={property} key={property} />)}
       </div>
-      <SuggestedItems pokemonIndex={pokemonIndex} />
+      <SuggestedItems filteredPokemonList={filteredPokemonList} name={name} />
     </div>
     </div>
   );

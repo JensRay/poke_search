@@ -6,7 +6,7 @@ import "./pokemonList.styles.scss";
 
 import { SearchPokemonType } from '../../@types/types'
 
-const PokemonList: React.FC<{filteredPokemonList:{}[],
+const PokemonList: React.FC<{filteredPokemonList:SearchPokemonType[],
   paginatedPokemonList: () => SearchPokemonType[],
   limit: number,
   offset: number,
@@ -41,7 +41,7 @@ const PokemonList: React.FC<{filteredPokemonList:{}[],
           {filteredPokemonList ? (
             <div className="row">
               {paginatedPokemonList()?.map(
-                ({id, name, url}:{id:number, name: string, url: string }) =>
+                ({id, name, url}:{id:string, name: string, url: string }) =>
                   name && (
                     <PokemonCard
                       key={id}
