@@ -4,29 +4,33 @@ import { Link } from "react-router-dom";
 import "./pokemon-card.styles.scss";
 
 const PokemonCard: React.FC<{ url: string; name: string; }> = ({name, url} ) => {
-  const [pokemonIndex, setPokemonIndex] = useState<string>("");
-  const [imageUrl, setImageUrl] = useState<string>("");
+  const [pokemonIndex, setPokemonIndex] = useState<string>();
+  const [imageUrl, setImageUrl] = useState<string>();
   const [weight, setWeight] = useState<string>("");
   const [height, setHeight] = useState<string>("");
   const [abilities, setAbilities] = useState<string[]>([]);
 
   useEffect(() => {
     async function fetchData() {
-      setPokemonIndex(url.split("/")[url.split("/").length - 2]);
-      setImageUrl(
-        `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIndex}.png`
-      );
+      try {
+        setPokemonIndex(url!.split("/")[url!.split("/").length - 2]);
+        setImageUrl(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIndex!}.png`
+          );
 
-      const res = await fetch(url);
-      const data = await res.json()
-      const weight = data.weight;
-      const height = data.height;
-      const abilities = data.abilities?.map(
-        (ability: { ability: { name: string; }; }, index: any) => ability.ability.name
-      );
-      setWeight(weight);
-      setHeight(height);
-      setAbilities(abilities);
+          const res = await fetch(url);
+          const data = await res.json()
+          const weight = data.weight;
+          const height = data.height;
+          const abilities = data.abilities?.map(
+            (ability: { ability: { name: string; }; }, index: any) => ability.ability.name
+            );
+            setWeight(weight);
+            setHeight(height);
+            setAbilities(abilities);
+          } catch (error) {
+
+          }
     }
     fetchData();
   }, [pokemonIndex, url]);

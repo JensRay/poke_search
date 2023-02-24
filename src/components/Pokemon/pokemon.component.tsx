@@ -16,7 +16,7 @@ function capitalize(w: string) {
 
 const Pokemon: React.FC = () => {
   const [name, setName] = useState<string>("");
-  const [pokemonIndex, setPokemonIndex] = useState<number>(0);
+  const [pokemonIndex, setPokemonIndex] = useState<string>('1');
   const [imageUrl, setImageUrl] = useState<string>("");
   const [weight, setWeight] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
@@ -25,30 +25,35 @@ const Pokemon: React.FC = () => {
   const [order, setOrder] = useState<number>(0);
   const [species, setSpecies] = useState<string>("");
   const [abilities, setAbilities] = useState<string[]>([]);
-  const { id } = useParams();
+
+  const id:string  = useParams().id as string;
 
   useEffect(() => {
-    setPokemonIndex(Number(id));
     async function fetchData() {
-      const url = `https://pokeapi.co/api/v2/pokemon/${pokemonIndex}`;
-      const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIndex}.png`;
-      const response = await fetch(url);
-      const data = await response.json();
-      const {name, weight, height, base_experience, is_default, order, species}: PokemonProperties = data.results
-      const abilities = data.results.abilities?.map((ability: { ability: { name: string; }; }) => ability.ability.name);
-
-      setName(name);
-      setImageUrl(imageUrl);
-      setWeight(weight);
-      setHeight(height);
-      setBaseExperience(base_experience);
-      setIsDefault(is_default);
-      setOrder(order);
-      setSpecies(capitalize(species));
-      setAbilities(abilities);
+      try {
+        setPokemonIndex(id)
+        const url: string = `https://pokeapi.co/api/v2/pokemon/${pokemonIndex!}`;
+        const imageUrl:string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIndex!}.png`;
+        const response = await fetch(url);
+        const data = await response.json();
+        const {name, weight, height, base_experience, is_default, order}: PokemonProperties = data
+        const species= data.species.name
+        const abilities = data.abilities?.map((ability: { ability: { name: string; }; }) => ability.ability.name);
+        // setUrl(url)
+        setName(name);
+        setImageUrl(imageUrl);
+        setWeight(weight);
+        setHeight(height);
+        setBaseExperience(base_experience);
+        setIsDefault(is_default);
+        setOrder(order);
+        setSpecies(capitalize(species));
+        setAbilities(abilities);
+      } catch {
+    }
       // setForm(form);
     }
-    fetchData();
+      fetchData();
   }, [id, pokemonIndex]);
 
   return (
