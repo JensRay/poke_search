@@ -1,19 +1,14 @@
-import { useState, useEffect } from "react";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Navigate,
-} from "react-router-dom";
+import './App.css';
 
-import RootLayoutPage from "./pages/RootLayout.page";
-import PokemonListPage from "./pages/PokemonList.page";
-import PokemonPage from "./pages/Pokemon.page";
+import { useEffect, useState } from 'react';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 
-import ColorModeProvider from "./context/ColorModeProvider";
-
-import "./App.css";
-
-import { BasePokemonType, SearchPokemonType } from './@types/types'
+import { BasePokemonType, SearchPokemonType } from './@types/types';
+import ColorModeProvider from './context/ColorModeProvider';
+import PokemonPage from './pages/Pokemon.page';
+import PokemonListPage from './pages/PokemonList.page';
+import RootLayoutPage from './pages/RootLayout.page';
+import Spinner from './utilities/spinner/Spinner';
 
 const App: React.FC = () =>  {
   const [offset, setOffset] = useState<number>(0);
@@ -24,6 +19,7 @@ const App: React.FC = () =>  {
   const [filteredPokemonList, setFilteredPokemonList] = useState<SearchPokemonType[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [sortingType, setSortingType] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const filterSearchedPokemons = (searchedPhrase: string) => {
     if (searchedPhrase !== "") {
@@ -101,7 +97,8 @@ const App: React.FC = () =>  {
         {
           path: "/pokemons",
           element: (
-            <PokemonListPage
+            <>
+              <PokemonListPage
               basePokemonList={basePokemonList}
               pokemonList={pokemonList}
               filteredPokemonList={filteredPokemonList}
@@ -111,7 +108,12 @@ const App: React.FC = () =>  {
               pageNumber={pageNumber}
               setPageNumber={setPageNumber}
               paginatedPokemonList={paginatedPokemonList}
-            />
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              />
+              {
+              isLoading && <Spinner />}
+              </>
           ),
         },
       ],
@@ -166,7 +168,7 @@ const App: React.FC = () =>  {
 
   return (
     <ColorModeProvider>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </ColorModeProvider>
   );
 }

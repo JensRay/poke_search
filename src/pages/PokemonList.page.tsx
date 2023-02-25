@@ -1,6 +1,5 @@
-import PokemonList from "../components/PokemonList/pokemonList.component";
-
-import { BasePokemonType, SearchPokemonType } from "../@types/types";
+import { BasePokemonType, SearchPokemonType } from '../@types/types';
+import PokemonList from '../components/PokemonList/pokemonList.component';
 
 const PokemonListPage:React.FC<{
   basePokemonList: BasePokemonType[],
@@ -12,6 +11,8 @@ const PokemonListPage:React.FC<{
   setOffset: React.Dispatch<React.SetStateAction<number>>,
   pageNumber: number,
   setPageNumber: React.Dispatch<React.SetStateAction<number>>,
+  isLoading: boolean,
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }> = ({
   filteredPokemonList,
   paginatedPokemonList,
@@ -20,16 +21,20 @@ const PokemonListPage:React.FC<{
   setOffset,
   pageNumber,
   setPageNumber,
+  isLoading,
+  setIsLoading
 }) => {
   return (
     <PokemonList
-    filteredPokemonList={filteredPokemonList}
-    paginatedPokemonList={paginatedPokemonList}
-    limit={limit}
-    setOffset={setOffset}
-    offset={offset}
-    pageNumber={pageNumber}
-    setPageNumber={setPageNumber}
+      filteredPokemonList={filteredPokemonList}
+      paginatedPokemonList={paginatedPokemonList}
+      limit={limit}
+      setOffset={setOffset}
+      offset={offset}
+      pageNumber={pageNumber}
+      setPageNumber={setPageNumber}
+      isLoading={isLoading}
+      setIsLoading={setIsLoading}
     />
   );
 };

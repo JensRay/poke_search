@@ -1,24 +1,16 @@
-$brown: #4B4343;
-$dark_blue: #367AAC;
-$white: #FFFFFF;
+$brown: #4b4343;
+$dark_blue: #367aac;
+$white: #ffffff;
+$gray: #ccc;
 $light_gray: #e4e4e4bc;
 $dark_gray: #797979;
 
 // light mode
-$light_blue: #138AE0;
-
+$light_blue: #138ae0;
 
 // dark mode
-$navy_blue: #1F374A;
+$navy_blue: #1f374a;
 $light_brown: #707070;
-
-
-
-.blue {
-  color: $dark_blue;
-}
-
-$gray: #CCC;
 
 .dark {
   .text__theme {
@@ -52,7 +44,6 @@ $gray: #CCC;
     background-color: white;
     color: $light_blue;
   }
-
 }
 
 .light {
@@ -85,12 +76,6 @@ $gray: #CCC;
 
   .button__theme {
     background-color: $light_blue;
-    color: white ;
+    color: white;
   }
 }
-
-
-// * {
-//   padding: 0;
-//   margin: 0;
-// }

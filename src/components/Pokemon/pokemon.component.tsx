@@ -1,21 +1,20 @@
-import { useState, useEffect } from "react";
+import './pokemon.styles.scss';
 
-import { useParams, Link } from "react-router-dom";
-
-import PropertiesDropdown from "../UI/properties-dropdown.component";
-import SuggestedItems from "../UI/suggested-items.component";
-import DarkMode from "../DarkMode/colorMode.component";
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 import { PokemonProperties, SearchPokemonType } from '../../@types/types';
-
-import "./pokemon.styles.scss";
+import Spinner from '../../utilities/spinner/Spinner';
+import DarkMode from '../DarkMode/colorMode.component';
+import PropertiesDropdown from '../UI/properties-dropdown.component';
+import SuggestedItems from '../UI/suggested-items.component';
 
 const capitalize = (w: string) => {
   return w[0].toUpperCase() + w.slice(1);
-}
-const PROPERTIES_DROPDOWN = ['Form','Types', 'Game Indices', 'Stats', 'Moves' ]
+};
+const PROPERTIES_DROPDOWN = ['Form', 'Types', 'Game Indices', 'Stats', 'Moves'];
 
-const Pokemon: React.FC<{filteredPokemonList: SearchPokemonType[]}> = ({filteredPokemonList}) => {
+const Pokemon: React.FC<{ filteredPokemonList: SearchPokemonType[]; }> = ({ filteredPokemonList }) => {
   const [name, setName] = useState<string>("");
   const [pokemonIndex, setPokemonIndex] = useState<string>('1');
   const [imageUrl, setImageUrl] = useState<string>("");
@@ -26,20 +25,22 @@ const Pokemon: React.FC<{filteredPokemonList: SearchPokemonType[]}> = ({filtered
   const [order, setOrder] = useState<number>(0);
   const [species, setSpecies] = useState<string>("");
   const [abilities, setAbilities] = useState<string[]>([]);
-  const [url, setUrl] = useState<string>('')
+  const [url, setUrl] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const id  = useParams().id as string
+  const id = useParams().id as string;
 
   useEffect(() => {
     async function fetchData() {
       try {
-        setPokemonIndex(id)
+        setIsLoading(true);
+        setPokemonIndex(id);
         setUrl(`https://pokeapi.co/api/v2/pokemon/${pokemonIndex!}`);
-        const imageUrl:string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIndex!}.png`;
+        const imageUrl: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIndex!}.png`;
         const response = await fetch(url);
         const data = await response.json();
-        const {name, weight, height, base_experience, is_default, order}: PokemonProperties = data
-        const species= data.species.name
+        const { name, weight, height, base_experience, is_default, order }: PokemonProperties = data;
+        const species = data.species.name;
         const abilities = data.abilities?.map((ability: { ability: { name: string; }; }) => ability.ability.name);
 
         setName(name);
@@ -51,15 +52,14 @@ const Pokemon: React.FC<{filteredPokemonList: SearchPokemonType[]}> = ({filtered
         setOrder(order);
         setSpecies(capitalize(species));
         setAbilities(abilities);
+        setIsLoading(false);
       } catch {
-    }
+      }
       // setForm(form);
     }
-      fetchData();
+    fetchData();
   }, [id, pokemonIndex, url]);
-
-  return (
-    <div className="pokemon-background background__theme">
+  const pokemon_html = <div className="pokemon-background background__theme">
     <div className="pokemon-page ">
       <div className="pokemon-page__heading">
         <div className="pokemon-page__heading-side-box ">
@@ -90,11 +90,15 @@ const Pokemon: React.FC<{filteredPokemonList: SearchPokemonType[]}> = ({filtered
             <li key={ability}>{ability}</li>
           ))}
         </PropertiesDropdown>
-       {PROPERTIES_DROPDOWN.map(property =>  <PropertiesDropdown title={property} key={property} />)}
+        {PROPERTIES_DROPDOWN.map(property => <PropertiesDropdown title={property} key={property} />)}
       </div>
       <SuggestedItems filteredPokemonList={filteredPokemonList} name={name} />
     </div>
-    </div>
+  </div>;
+  return (
+    <>
+      {isLoading ? <Spinner /> : pokemon_html}
+    </>
   );
 };
 

@@ -1,14 +1,21 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import './pokemon-card.styles.scss';
 
-import "./pokemon-card.styles.scss";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const PokemonCard: React.FC<{ url: string; name: string; id: string}> = ({name, url, id} ) => {
+import Spinner from '../../utilities/spinner/Spinner';
+
+const PokemonCard: React.FC<{
+  url: string; name: string; id: string; isLoading?: boolean;
+  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({ name, url, id, isLoading, setIsLoading }) => {
   const [pokemonIndex, setPokemonIndex] = useState<string>();
   const [imageUrl, setImageUrl] = useState<string>();
   const [weight, setWeight] = useState<string>("");
   const [height, setHeight] = useState<string>("");
   const [abilities, setAbilities] = useState<string[]>([]);
+  const [imageLoading, setImageLoading] = useState<boolean>(true);
+
 
   useEffect(() => {
     async function fetchData() {
@@ -16,32 +23,39 @@ const PokemonCard: React.FC<{ url: string; name: string; id: string}> = ({name, 
         setPokemonIndex(id.toString());
         setImageUrl(
           `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
-          );
-
-          const res = await fetch(url);
-          const data = await res.json()
-          const weight = data.weight;
-          const height = data.height;
-          const abilities = data.abilities?.map(
-            // remove index
-            (ability: { ability: { name: string; }; }, index: any) => ability.ability.name
-            );
-            setWeight(weight);
-            setHeight(height);
-            setAbilities(abilities);
-          } catch (error) {
-
-          }
+        );
+        const res = await fetch(url);
+        const data = await res.json();
+        const weight = data.weight;
+        const height = data.height;
+        const abilities = data.abilities?.map(
+          (ability: { ability: { name: string; }; }, index: any) => ability.ability.name
+        );
+        setWeight(weight);
+        setHeight(height);
+        setAbilities(abilities);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    if (setIsLoading !== undefined) {
+      setIsLoading(false);
     }
     fetchData();
-  }, [id, pokemonIndex, url]);
+  }, [id, pokemonIndex, url, setIsLoading]);
 
+  const imageLoaded = () => {
+    setImageLoading(false);
+  };
 
   return (
     <div className="pokemon-card__container text__theme inner_background__theme">
       <Link to={`/pokemon/${pokemonIndex}`}>
         <div className="pokemon-card__img">
-          <img src={imageUrl} alt={name} />
+          <div style={{ display: imageLoading ? "block" : "none" }}>
+            <Spinner />
+          </div>
+          <img style={{ display: imageLoading ? "none" : "block" }} src={imageUrl} alt={name} onLoad={imageLoaded} />
         </div>
       </Link>
       <h3 className="pokemon-card__title">{name}</h3>
@@ -56,8 +70,9 @@ const PokemonCard: React.FC<{ url: string; name: string; id: string}> = ({name, 
         </div>
         <div className="pokemon-card__property">
           <span>Abilities:</span>
-          <div className="pokemon-card__abilities">
-            {abilities?.map((ability,index) => (
+          <div
+            className="pokemon-card__abilities">
+            {abilities?.map((ability, index) => (
               <span key={index}>{ability}</span>
             ))}
           </div>
