@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import Spinner from '../../utilities/spinner/Spinner';
 
 const PokemonCard: React.FC<{
-  url: string; name: string; id: string; isLoading?: boolean;
+  url: string; name: string; id: string;
   setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ name, url, id, isLoading, setIsLoading }) => {
+}> = ({ name, url, id, setIsLoading }) => {
   const [pokemonIndex, setPokemonIndex] = useState<string>();
   const [imageUrl, setImageUrl] = useState<string>();
   const [weight, setWeight] = useState<string>("");

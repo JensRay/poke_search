@@ -1,8 +1,8 @@
-import { useState, useContext } from "react";
+import './colorMode.styles.scss';
 
-import ColorModeContext from "../../context/ColorModeContext";
+import { useContext, useState } from 'react';
 
-import "./colorMode.styles.scss";
+import ColorModeContext from '../../context/ColorModeContext';
 
 const DarkMode: React.FC = () => {
   const { colorMode, setColorMode }: {colorMode: string, setColorMode: React.Dispatch<React.SetStateAction<string>>} = useContext(ColorModeContext);
@@ -12,6 +12,7 @@ const DarkMode: React.FC = () => {
     setIsActive((isActive) => !isActive);
     setColorMode(colorMode === "light" ? "dark" : "light");
   };
+  console.log(colorMode)
   return (
     <div className="color-mode__container">
       <span className={`color-mode__title ${isActive ? "" : "active_light"}`}>

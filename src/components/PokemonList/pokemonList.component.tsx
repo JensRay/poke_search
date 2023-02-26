@@ -50,7 +50,6 @@ const PokemonList: React.FC<{filteredPokemonList:SearchPokemonType[],
                       name={name}
                       url={url}
                       id={id}
-                      isLoading={isLoading}
                       setIsLoading={setIsLoading}
                     />
                   )
