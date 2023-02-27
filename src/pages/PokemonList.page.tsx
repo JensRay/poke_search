@@ -1,19 +1,21 @@
 import { BasePokemonType, SearchPokemonType } from '../@types/types';
 import PokemonList from '../components/PokemonList/pokemonList.component';
 
-const PokemonListPage:React.FC<{
-  basePokemonList: BasePokemonType[],
-  pokemonList: SearchPokemonType[],
-  filteredPokemonList: SearchPokemonType[],
-  paginatedPokemonList: () => SearchPokemonType[],
-  limit: number,
-  offset: number,
-  setOffset: React.Dispatch<React.SetStateAction<number>>,
-  pageNumber: number,
-  setPageNumber: React.Dispatch<React.SetStateAction<number>>,
-  isLoading: boolean,
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
-}> = ({
+interface PokemonListPageProps {
+  basePokemonList: BasePokemonType[];
+  pokemonList: SearchPokemonType[];
+  filteredPokemonList: SearchPokemonType[];
+  paginatedPokemonList: () => SearchPokemonType[];
+  limit: number;
+  offset: number;
+  setOffset: React.Dispatch<React.SetStateAction<number>>;
+  pageNumber: number;
+  setPageNumber: React.Dispatch<React.SetStateAction<number>>;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const PokemonListPage:React.FC<PokemonListPageProps> = ({
   filteredPokemonList,
   paginatedPokemonList,
   limit,
@@ -23,7 +25,7 @@ const PokemonListPage:React.FC<{
   setPageNumber,
   isLoading,
   setIsLoading
-}) => {
+}: PokemonListPageProps) => {
   return (
     <PokemonList
       filteredPokemonList={filteredPokemonList}

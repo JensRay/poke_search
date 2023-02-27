@@ -1,12 +1,12 @@
-import { Fragment } from "react";
+import './navigation.styles.scss';
 
-import ResultsPerPage from "../NavBar/results-per-page.component";
-import SearchBar from "../NavBar/search-bar.component";
-import Sorting from "../NavBar/sorting.component";
+import { Fragment } from 'react';
 
-import "./navigation.styles.scss";
+import ResultsPerPage from '../NavBar/results-per-page.component';
+import SearchBar from '../NavBar/search-bar.component';
+import Sorting from '../NavBar/sorting.component';
 
-const Navigation: React.FC<{
+interface NavigationProps {
   searchedPhrase: string,
   handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void,
   limit: number,
@@ -16,7 +16,9 @@ const Navigation: React.FC<{
   setSortingType: React.Dispatch<React.SetStateAction<string>>,
   sortingType: string,
   sortPokemons: (value: string) => void,
-}> = ({
+}
+
+const Navigation: React.FC<NavigationProps> = ({
   searchedPhrase,
   handleSearch,
   limit,
@@ -26,7 +28,7 @@ const Navigation: React.FC<{
   setSortingType,
   sortingType,
   sortPokemons,
-}) =>
+}: NavigationProps) =>
   {
     return (
       <Fragment>

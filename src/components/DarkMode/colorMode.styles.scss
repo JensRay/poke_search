@@ -1,4 +1,4 @@
-@import '../../utilities/variables';
+@import "../../utilities/variables";
 
 .color-mode__container {
   display: flex;
@@ -6,7 +6,7 @@
   order: 1;
 
   span:first-child {
-    color: $dark_gray;
+    color: $light_gray;
   }
 
   span.active_light {
@@ -60,8 +60,8 @@
   right: -10px;
   bottom: 0;
   background-color: $white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   box-shadow: 0 0 1px $light_blue;
 }
 
@@ -73,11 +73,10 @@
   left: 0px;
   bottom: 1px;
   background-color: $light_blue;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   box-shadow: 0 0 1px $light_blue;
 }
-
 
 input:checked + .slider {
   background-color: $light_gray;

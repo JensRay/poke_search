@@ -1,5 +1,3 @@
-import './App.css';
-
 import { useEffect, useState } from 'react';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 
@@ -26,7 +24,6 @@ const App: React.FC = () =>  {
       const pokemons = pokemonList.filter((pokemon) =>
         pokemon.name.includes(searchedPhrase)
       );
-
       setFilteredPokemonList(pokemons);
     }
   };
@@ -72,6 +69,49 @@ const App: React.FC = () =>  {
     const filtered = filteredPokemonList.slice(offset, offset + limit);
     return filtered;
   };
+
+    const getPokemonsList = async () => {
+    try {
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000`
+      );
+      const data = await response.json();
+
+      setBasePokemonList(data.results);
+    } catch (error) {
+      // setError(error);
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getPokemonsList();
+  }, []);
+
+  useEffect(() => {
+    const getAllPokemons = async () => {
+      const responses = await Promise.all(
+        basePokemonList.map(async (pokemon) => {
+          const res = await fetch(pokemon.url);
+          const data = await res.json();
+
+          return {
+            ...pokemon,
+            weight: data.weight,
+            height: data.height,
+            id: data.id,
+          };
+        })
+      );
+      setPokemonList(responses);
+    };
+
+    getAllPokemons();
+  }, [basePokemonList]);
+
+  useEffect(() => {
+    setFilteredPokemonList(pokemonList);
+  }, [pokemonList]);
 
   const router = createBrowserRouter([
     {
@@ -120,51 +160,6 @@ const App: React.FC = () =>  {
     },
     { path: "/pokemon/:id", element: <PokemonPage filteredPokemonList={filteredPokemonList}/> },
   ]);
-
-  const getPokemonsList = async () => {
-    try {
-      const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000`
-      );
-      const data = await response.json();
-
-      setBasePokemonList(data.results);
-    } catch (error) {
-      // setError(error);
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getPokemonsList();
-  }, []);
-
-  useEffect(() => {
-    const getAllPokemons = async () => {
-      const responses = await Promise.all(
-        basePokemonList.map(async (pokemon) => {
-          const res = await fetch(pokemon.url);
-          const data = await res.json();
-
-          return {
-            ...pokemon,
-            weight: data.weight,
-            height: data.height,
-            id: data.id,
-          };
-        })
-      );
-      setPokemonList(responses);
-    };
-
-    getAllPokemons();
-  }, [basePokemonList]);
-
-  useEffect(() => {
-    setFilteredPokemonList(pokemonList);
-  }, [pokemonList]);
-
-
 
   return (
     <ColorModeProvider>

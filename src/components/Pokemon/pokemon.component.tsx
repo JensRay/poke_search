@@ -3,18 +3,26 @@ import './pokemon.styles.scss';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import { PokemonProperties, SearchPokemonType } from '../../@types/types';
+import { SearchPokemonType } from '../../@types/types';
+import { PROPERTIES_DROPDOWN } from '../../utilities/constants';
+import { capitalize } from '../../utilities/functions';
 import Spinner from '../../utilities/spinner/Spinner';
 import DarkMode from '../DarkMode/colorMode.component';
 import PropertiesDropdown from '../UI/properties-dropdown.component';
 import SuggestedItems from '../UI/suggested-items.component';
 
-const capitalize = (w: string) => {
-  return w[0].toUpperCase() + w.slice(1);
-};
-const PROPERTIES_DROPDOWN = ['Form', 'Types', 'Game Indices', 'Stats', 'Moves'];
+interface PokemonProps { filteredPokemonList: SearchPokemonType[]; }
+interface PokemonProperties {
+  name: string;
+  weight: number;
+  height: number;
+  base_experience: number;
+  is_default: boolean;
+  order: number;
+  species: string;
+}
 
-const Pokemon: React.FC<{ filteredPokemonList: SearchPokemonType[]; }> = ({ filteredPokemonList }) => {
+const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) => {
   const [name, setName] = useState<string>("");
   const [pokemonIndex, setPokemonIndex] = useState<string>('1');
   const [imageUrl, setImageUrl] = useState<string>("");

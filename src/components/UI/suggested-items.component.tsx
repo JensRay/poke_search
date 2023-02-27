@@ -1,9 +1,13 @@
-import "./suggested-items.styles.scss";
+import './suggested-items.styles.scss';
 
-import PokemonCard from "../PokemonCard/pokemon-card.component";
 import { SearchPokemonType } from '../../@types/types';
+import PokemonCard from '../PokemonCard/pokemon-card.component';
+
 var _ = require('underscore');
-const SuggestedItems: React.FC<{filteredPokemonList: SearchPokemonType[], name: string}> = ({filteredPokemonList, name}) => {
+
+interface SuggestedItemsProps { filteredPokemonList: SearchPokemonType[], name: string; }
+
+const SuggestedItems: React.FC<SuggestedItemsProps> = ({filteredPokemonList, name}: SuggestedItemsProps) => {
   const suggestedPokemons = filteredPokemonList.filter((p) => p.name !== name)
   const array_of_suggested = _.sample(suggestedPokemons, 3)
 

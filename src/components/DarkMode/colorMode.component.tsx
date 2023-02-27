@@ -12,7 +12,6 @@ const DarkMode: React.FC = () => {
     setIsActive((isActive) => !isActive);
     setColorMode(colorMode === "light" ? "dark" : "light");
   };
-  console.log(colorMode)
   return (
     <div className="color-mode__container">
       <span className={`color-mode__title ${isActive ? "" : "active_light"}`}>

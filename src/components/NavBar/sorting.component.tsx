@@ -1,10 +1,16 @@
-import { useState } from "react";
+import './sorting.styles.scss';
 
-import "./sorting.styles.scss";
+import { useState } from 'react';
 
-const SORTING_TYPES = ["From A-Z", "From Z-A", "By Height", "By Weight"];
+import { SORTING_TYPES } from '../../utilities/constants';
 
-const Sorting:React.FC<{ sortingType: string, setSortingType: React.Dispatch<React.SetStateAction<string>>, sortPokemons: (value: string) => void }> = ({ sortingType, setSortingType, sortPokemons }) => {
+interface SortingProps {
+  sortingType: string;
+  setSortingType: React.Dispatch<React.SetStateAction<string>>;
+  sortPokemons: (value: string) => void;
+}
+
+const Sorting:React.FC<SortingProps> = ({ sortingType, setSortingType, sortPokemons }: SortingProps) => {
   const [isActive, setIsActive] = useState<boolean>(false);
 
   const toggleList = () => {

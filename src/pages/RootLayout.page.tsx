@@ -1,10 +1,10 @@
-import { Outlet } from "react-router-dom";
-import { useContext } from "react";
+import { useContext } from 'react';
+import { Outlet } from 'react-router-dom';
 
-import Navigation from "../components/navigation/navigation.component";
-import ColorModeContext from "../context/ColorModeContext";
+import Navigation from '../components/navigation/navigation.component';
+import ColorModeContext from '../context/ColorModeContext';
 
-const RootLayout: React.FC<{
+interface RootLayoutProps {
   searchedPhrase: string,
   handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void,
   limit: number,
@@ -14,7 +14,9 @@ const RootLayout: React.FC<{
   sortingType: string,
   setSortingType: React.Dispatch<React.SetStateAction<string>>,
   sortPokemons: (value: string) => void,
-}> = ({
+}
+
+const RootLayout: React.FC<RootLayoutProps> = ({
   searchedPhrase,
   handleSearch,
   limit,
@@ -24,7 +26,7 @@ const RootLayout: React.FC<{
   sortingType,
   setSortingType,
   sortPokemons,
-}) => {
+}: RootLayoutProps) => {
   const { colorMode } = useContext(ColorModeContext);
   return (
     <div className={colorMode === "dark" ? "dark" : "light"}>

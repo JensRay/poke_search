@@ -1,6 +1,6 @@
 import './spinner.styles.scss';
 
-const Spinner = () => {
+const Spinner: React.FC = () => {
   return <div className="loader" />
 }
 

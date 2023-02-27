@@ -1,9 +1,17 @@
-import { useState } from "react";
-import "./results-per-page.styles.scss";
+import './results-per-page.styles.scss';
 
-const ITEMS_PER_PAGE = [10, 20, 50];
+import { useState } from 'react';
 
-const ResultsPerPage: React.FC<{limit: number, setLimit: React.Dispatch<React.SetStateAction<number>>, setOffset: React.Dispatch<React.SetStateAction<number>>, setPageNumber: React.Dispatch<React.SetStateAction<number>> }> = ({ limit, setLimit, setOffset, setPageNumber }) =>
+import { ITEMS_PER_PAGE } from '../../utilities/constants';
+
+interface ResultsPerPageProps {
+  limit: number;
+  setLimit: React.Dispatch<React.SetStateAction<number>>;
+  setOffset: React.Dispatch<React.SetStateAction<number>>;
+  setPageNumber: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const ResultsPerPage: React.FC<ResultsPerPageProps> = ({ limit, setLimit, setOffset, setPageNumber }: ResultsPerPageProps) =>
   {
     const [isActive, setIsActive] = useState<boolean>(false);
 

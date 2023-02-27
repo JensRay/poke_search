@@ -5,16 +5,18 @@ import DarkMode from '../DarkMode/colorMode.component';
 import Pagination from '../Pagination/pagination.component';
 import PokemonCard from '../PokemonCard/pokemon-card.component';
 
-const PokemonList: React.FC<{filteredPokemonList:SearchPokemonType[],
-  paginatedPokemonList: () => SearchPokemonType[],
-  limit: number,
-  offset: number,
-  setOffset: React.Dispatch<React.SetStateAction<number>>,
-  pageNumber: number,
-  setPageNumber: React.Dispatch<React.SetStateAction<number>>,
-  isLoading: boolean,
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
-  }> = ({
+interface PokemonListProps {filteredPokemonList:SearchPokemonType[],
+  paginatedPokemonList: () => SearchPokemonType[];
+  limit: number;
+  offset: number;
+  setOffset: React.Dispatch<React.SetStateAction<number>>;
+  pageNumber: number;
+  setPageNumber: React.Dispatch<React.SetStateAction<number>>;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const PokemonList: React.FC<PokemonListProps> = ({
   filteredPokemonList,
   paginatedPokemonList,
   limit,
@@ -24,7 +26,7 @@ const PokemonList: React.FC<{filteredPokemonList:SearchPokemonType[],
   setPageNumber,
   isLoading,
   setIsLoading,
-}) => {
+}: PokemonListProps) => {
   return (
     <div className="main-container background__theme">
       <div className="pokemon-list__container">

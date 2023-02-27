@@ -1,6 +1,11 @@
-import "./search-bar.styles.scss";
+import './search-bar.styles.scss';
 
-const SearchBar:React.FC<{handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void, searchedPhrase: string}> = ({ handleSearch, searchedPhrase }) => {
+interface SearchBarProps {
+  handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  searchedPhrase: string;
+}
+
+const SearchBar:React.FC<SearchBarProps> = ({ handleSearch, searchedPhrase }: SearchBarProps) => {
   return (
     <div className="search-bar">
       <div className="search-bar__box">

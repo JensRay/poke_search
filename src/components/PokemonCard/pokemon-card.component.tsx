@@ -5,10 +5,14 @@ import { Link } from 'react-router-dom';
 
 import Spinner from '../../utilities/spinner/Spinner';
 
-const PokemonCard: React.FC<{
-  url: string; name: string; id: string;
-  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ name, url, id, setIsLoading }) => {
+interface PokemonCardInterface {
+  url: string;
+  name: string;
+  id: string;
+  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const PokemonCard: React.FC<PokemonCardInterface> = ({ name, url, id, setIsLoading }: PokemonCardInterface) => {
   const [pokemonIndex, setPokemonIndex] = useState<string>();
   const [imageUrl, setImageUrl] = useState<string>();
   const [weight, setWeight] = useState<string>("");
@@ -26,8 +30,7 @@ const PokemonCard: React.FC<{
         );
         const res = await fetch(url);
         const data = await res.json();
-        const weight = data.weight;
-        const height = data.height;
+        const {weight, height} = data;
         const abilities = data.abilities?.map(
           (ability: { ability: { name: string; }; }, index: any) => ability.ability.name
         );
