@@ -10,7 +10,7 @@ const PokemonPage: React.FC<PokemonPageProps> = ({filteredPokemonList}: PokemonP
   const { colorMode } = useContext(ColorModeContext);
   return (
     <div className={colorMode === "dark" ? "dark" : "light"}>
-      <Pokemon filteredPokemonList={filteredPokemonList}/>
+      <Pokemon filteredPokemonList={filteredPokemonList} />
     </div>
   );
 };

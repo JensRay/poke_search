@@ -45,14 +45,12 @@ const PokemonList: React.FC<PokemonListProps> = ({
         <div className="pokemon-list__grid">
             <div className="row">
               {paginatedPokemonList()?.map(
-                ({id, name, url}:{id:string, name: string, url: string }) =>
-                  name && (
+                (pokemon: SearchPokemonType) =>
+                  pokemon.name && (
                     <PokemonCard
-                      key={id}
-                      name={name}
-                      url={url}
-                      id={id}
+                      pokemon={pokemon}
                       setIsLoading={setIsLoading}
+                      key={pokemon.id}
                     />
                   )
                 )

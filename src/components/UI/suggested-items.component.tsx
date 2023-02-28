@@ -16,7 +16,7 @@ const SuggestedItems: React.FC<SuggestedItemsProps> = ({filteredPokemonList, nam
       <h2 className="text__theme">You Might Also Like</h2>
       <div className="suggested-items__items">
         {array_of_suggested.map((pokemon: SearchPokemonType) =>{ return (
-          <PokemonCard url={pokemon.url} name={pokemon.name} id={pokemon.id} key={pokemon.id} />
+          <PokemonCard pokemon={pokemon} key={Number(pokemon.id)} />
           )})
         }
       </div>

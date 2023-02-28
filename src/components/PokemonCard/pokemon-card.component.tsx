@@ -3,23 +3,25 @@ import './pokemon-card.styles.scss';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { SearchPokemonType } from '../../@types/types';
 import Spinner from '../../utilities/spinner/Spinner';
 
 interface PokemonCardInterface {
-  url: string;
-  name: string;
-  id: string;
-  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>
+  pokemon: SearchPokemonType;
+  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PokemonCard: React.FC<PokemonCardInterface> = ({ name, url, id, setIsLoading }: PokemonCardInterface) => {
+const PokemonCard: React.FC<PokemonCardInterface> = ({pokemon, setIsLoading}: PokemonCardInterface) => {
   const [pokemonIndex, setPokemonIndex] = useState<string>();
   const [imageUrl, setImageUrl] = useState<string>();
-  const [weight, setWeight] = useState<string>("");
-  const [height, setHeight] = useState<string>("");
   const [abilities, setAbilities] = useState<string[]>([]);
   const [imageLoading, setImageLoading] = useState<boolean>(true);
 
+  const { name, weight, height, url, id } = pokemon;
+
+  const imageLoaded = () => {
+    setImageLoading(false);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -30,12 +32,9 @@ const PokemonCard: React.FC<PokemonCardInterface> = ({ name, url, id, setIsLoadi
         );
         const res = await fetch(url);
         const data = await res.json();
-        const {weight, height} = data;
         const abilities = data.abilities?.map(
           (ability: { ability: { name: string; }; }, index: any) => ability.ability.name
         );
-        setWeight(weight);
-        setHeight(height);
         setAbilities(abilities);
       } catch (error) {
         console.log(error);
@@ -46,10 +45,6 @@ const PokemonCard: React.FC<PokemonCardInterface> = ({ name, url, id, setIsLoadi
     }
     fetchData();
   }, [id, pokemonIndex, url, setIsLoading]);
-
-  const imageLoaded = () => {
-    setImageLoading(false);
-  };
 
   return (
     <div className="pokemon-card__container text__theme inner_background__theme">

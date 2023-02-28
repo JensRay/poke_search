@@ -158,7 +158,7 @@ const App: React.FC = () =>  {
         },
       ],
     },
-    { path: "/pokemon/:id", element: <PokemonPage filteredPokemonList={filteredPokemonList}/> },
+    { path: "/pokemon/:id", element: <PokemonPage filteredPokemonList={filteredPokemonList} /> },
   ]);
 
   return (
