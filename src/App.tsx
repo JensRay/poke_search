@@ -20,12 +20,12 @@ const App: React.FC = () =>  {
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const filterSearchedPokemons = (searchedPhrase: string) => {
-    if (searchedPhrase !== "") {
+    // if (searchedPhrase !== "") {
       const pokemons = pokemonList.filter((pokemon) =>
         pokemon.name.includes(searchedPhrase)
       );
       setFilteredPokemonList(pokemons);
-    }
+    // }
   };
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
