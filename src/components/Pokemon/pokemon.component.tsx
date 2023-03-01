@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { SearchPokemonType } from '../../@types/types';
-import { PROPERTIES_DROPDOWN } from '../../utilities/constants';
 import { capitalize } from '../../utilities/functions';
 import Spinner from '../../utilities/spinner/Spinner';
 import DarkMode from '../DarkMode/colorMode.component';
@@ -33,6 +32,10 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
   const [order, setOrder] = useState<number>(0);
   const [species, setSpecies] = useState<string>("");
   const [abilities, setAbilities] = useState<string[]>([]);
+  const [forms, setForms] = useState<string[]>([])
+  const [types, setTypes] = useState<{ type: { name: string; }, slot: number; }[]>([])
+  const [gameIndices, setGameIndices] = useState<{ version: { name: string; }, game_index: number; }[]>([])
+  const [stats, setStats] = useState<{base_stat: number, effort: number, stat: {name: string}}[]>([])
   const [url, setUrl] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -50,6 +53,10 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
         const { name, weight, height, base_experience, is_default, order }: PokemonProperties = data;
         const species = data.species.name;
         const abilities = data.abilities?.map((ability: { ability: { name: string; }; }) => ability.ability.name);
+        const forms = data.forms?.map((form: { name: string; }) => form.name);
+        const types = data.types;
+        const gameIndices = data.game_indices;
+        const stats = data.stats;
 
         setName(name);
         setImageUrl(imageUrl);
@@ -60,13 +67,18 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
         setOrder(order);
         setSpecies(capitalize(species));
         setAbilities(abilities);
+        setForms(forms);
+        setTypes(types);
+        setGameIndices(gameIndices);
+        setStats(stats);
         setIsLoading(false);
-      } catch {
+      } catch (error) {
+        console.log(error)
       }
-      // setForm(form);
     }
     fetchData();
   }, [id, pokemonIndex, url]);
+
   const pokemon_html = <div className="pokemon-background background__theme">
     <div className="pokemon-page ">
       <div className="pokemon-page__heading">
@@ -95,10 +107,39 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
       <div className="pokemon-page__properties-dropdowns">
         <PropertiesDropdown title={"Abilities"}>
           {abilities?.map((ability) => (
-            <li key={ability}>{ability}</li>
+            <li key={ability} className='third-text__theme'>{capitalize(ability)}</li>
           ))}
         </PropertiesDropdown>
-        {PROPERTIES_DROPDOWN.map(property => <PropertiesDropdown title={property} key={property} />)}
+        <PropertiesDropdown title={"Forms"}>
+          {forms?.map((form) => (
+            <li key={form}>{capitalize(form)}</li>
+          ))}
+        </PropertiesDropdown>
+        <PropertiesDropdown title={"Types"}>
+          {types?.map((t) => (
+            <li key={t.type.name}>
+              <span>Name: {capitalize(t.type.name)}</span>
+              <span>Slot: {t.slot}</span>
+            </li>
+          ))}
+        </PropertiesDropdown>
+        <PropertiesDropdown title={"Game Indices"}>
+          {gameIndices?.map((gi) => (
+            <li key={gi.version.name}>
+              <span>Game Index: {gi.game_index}</span>
+              <span>Version: {capitalize(gi.version.name)}</span>
+            </li>
+          ))}
+        </PropertiesDropdown>
+        <PropertiesDropdown title={"Stats"}>
+          {stats?.map((s) => (
+            <li key={s.stat.name}>
+              <span>Name: {capitalize(s.stat.name)}</span>
+              <span>Effort: {s.effort}</span>
+              <span>Base Stat: {s.base_stat}</span>
+            </li>
+          ))}
+        </PropertiesDropdown>
       </div>
       <SuggestedItems filteredPokemonList={filteredPokemonList} name={name} />
     </div>

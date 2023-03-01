@@ -1,7 +1,14 @@
-@import '../../utilities/variables';
+@import "../../utilities/variables";
 
 .pokemon-page__properties-dropdowns {
   margin-top: 20px;
+
+  li {
+    span {
+      display: inline-block;
+      width: 20%;
+    }
+  }
 }
 
 .properties-dropdown {
@@ -12,11 +19,12 @@
   width: 100%;
   background-color: white;
   border: 1px solid $gray;
-  box-shadow: 0 2px 3px $gray;
+  box-shadow: 0 0 2px $gray;
   display: flex;
   justify-content: space-between;
   border-radius: 7px;
   cursor: pointer;
+  margin-top: 8px;
 
   span {
     color: $dark_blue;
@@ -34,6 +42,7 @@
   padding: 5px 0 5px 10px;
   box-sizing: border-box;
   border-radius: 7px;
+
   cursor: pointer;
   li {
     padding: 5px;
