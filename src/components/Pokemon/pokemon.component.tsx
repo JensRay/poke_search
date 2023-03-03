@@ -1,9 +1,10 @@
 import './pokemon.styles.scss';
 
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { SearchPokemonType } from '../../@types/types';
+import Button from '../../utilities/Button';
 import { capitalize } from '../../utilities/functions';
 import Spinner from '../../utilities/spinner/Spinner';
 import DarkMode from '../DarkMode/colorMode.component';
@@ -83,10 +84,11 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
     <div className="pokemon-page ">
       <div className="pokemon-page__heading">
         <div className="pokemon-page__heading-side-box ">
-          <Link className="pokemon-page__button-back button__theme" to='/'
+          {/* <Link className="pokemon-page__button-back button__theme" to='/'
           >
             &#10094; Back
-          </Link>
+          </Link> */}
+          <Button to='/' text='&#10094; ' text2='Back'/>
         </div>
         <div className="pokemon-page__heading-box">
           <img className="pokemon-page__main-img" src={imageUrl} alt={name} />

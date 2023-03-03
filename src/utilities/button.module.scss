@@ -1,0 +1,29 @@
+@import "../utilities/variables";
+
+a.custom_button {
+  word-spacing: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 30px;
+  // background-color: $dark_blue;
+  height: 30px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10px;
+  // color: white;
+  position: relative;
+  top: 0;
+  transition: top 0.1s linear;
+  margin-top: 10px;
+}
+
+a:hover.custom_button {
+  background-color: white;
+  color: $dark_blue;
+  border: 1px solid $dark_blue;
+  padding: 7px 29px;
+  top: -1px;
+  span:last-child {
+    text-decoration: underline;
+  }
+}
