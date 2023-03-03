@@ -1,13 +1,16 @@
-@import '../../utilities/variables';
+@import "../../utilities/variables";
 
 .pagination {
   order: 2;
-  span {
+  span,
+  button {
     font-size: 12px;
     padding: 3px 10px;
+    border: none;
+    background-color: transparent;
   }
 
-  span.pagination__button:hover {
+  button.pagination__button:hover {
     text-decoration: underline;
   }
 

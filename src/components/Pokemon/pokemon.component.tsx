@@ -1,5 +1,3 @@
-import './pokemon.styles.scss';
-
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -10,6 +8,7 @@ import Spinner from '../../utilities/spinner/Spinner';
 import DarkMode from '../DarkMode/colorMode.component';
 import PropertiesDropdown from '../UI/properties-dropdown.component';
 import SuggestedItems from '../UI/suggested-items.component';
+import styles from './pokemon.module.scss';
 
 interface PokemonProps { filteredPokemonList: SearchPokemonType[]; }
 interface PokemonProperties {
@@ -80,36 +79,32 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
     fetchData();
   }, [id, pokemonIndex, url]);
 
-  const pokemon_html = <div className="pokemon-background background__theme">
-    <div className="pokemon-page ">
-      <div className="pokemon-page__heading">
-        <div className="pokemon-page__heading-side-box ">
-          {/* <Link className="pokemon-page__button-back button__theme" to='/'
-          >
-            &#10094; Back
-          </Link> */}
+  const pokemon_html = <div className={`${styles.pokemon_background} background__theme`}>
+    <div className={styles.pokemon_page}>
+      <div className={styles.pokemon_page__heading}>
+        <div className={styles.pokemon_page__heading_side_box}>
           <Button to='/' text='&#10094; ' text2='Back'/>
         </div>
-        <div className="pokemon-page__heading-box">
-          <img className="pokemon-page__main-img" src={imageUrl} alt={name} />
+        <div className={styles.pokemon_page__heading_box}>
+          <img className={styles.pokemon_page__main_img} src={imageUrl} alt={name} />
         </div>
-        <div className="pokemon-page__heading-side-box">
+        <div className={styles.pokemon_page__heading_side_box}>
           <DarkMode />
         </div>
       </div>
-      <h2 className="pokemon-page__title text__theme">{name.toUpperCase()}</h2>
-      <div className="pokemon-page__pokemon-main-properties text__theme">
-        <span className="">Height: {height}</span>
+      <h2 className={`${styles.pokemon_page__title} text__theme`}>{name.toUpperCase()}</h2>
+      <div className={`${styles.pokemon_page__pokemon_main_properties} text__theme`}>
+        <span>Height: {height}</span>
         <span>Weight: {weight}</span>
         <span>Base experience: {baseExperience}</span>
         <span>Default: {isDefault.toString()}</span>
         <span>Order: {order}</span>
         <span>Species: {species}</span>
       </div>
-      <div className="pokemon-page__properties-dropdowns">
+      <div className={styles.pokemon_page__properties_dropdowns}>
         <PropertiesDropdown title={"Abilities"}>
           {abilities?.map((ability) => (
-            <li key={ability} className='third-text__theme'>{capitalize(ability)}</li>
+            <li key={ability}>{capitalize(ability)}</li>
           ))}
         </PropertiesDropdown>
         <PropertiesDropdown title={"Forms"}>

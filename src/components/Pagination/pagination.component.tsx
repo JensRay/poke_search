@@ -1,6 +1,5 @@
-import './pagination.styles.scss';
-
 import { SearchPokemonType } from '../../@types/types';
+import styles from './pagination.module.scss';
 
 interface PaginationProps {
   offset: number
@@ -33,31 +32,34 @@ const Pagination: React.FC<PaginationProps> = ({
     }
   };
 
+  const pagination_active = `${styles.pagination__active} third_text__theme`
+  const pagination_inactive = `${styles.pagination__inactive} grayed_text__theme`
+
   return (
-    <div className="pagination">
-      <span
+    <div className={styles.pagination}>
+      <button
         onClick={paginatePrev}
         className={`${
           offset + 1 > limit
-            ? "pagination__active third_text__theme"
-            : "pagination__inactive grayed_text__theme"
-        } pagination__button`}
+            ? pagination_active
+            : pagination_inactive
+        } ${styles.pagination__button}`}
       >
         Previous page
-      </span>
-      <span className="text__theme">{`${pageNumber} / ${Math.ceil(
+      </button>
+      <span className='text__theme'>{`${pageNumber} / ${Math.ceil(
         filteredPokemonList.length / limit
       )}`}</span>
-      <span
+      <button
         onClick={paginateNext}
         className={`${
           Math.ceil(filteredPokemonList.length / limit) !== pageNumber
-            ? "pagination__active third_text__theme"
-            : "pagination__inactive grayed_text__theme"
-        } pagination__button`}
+            ? pagination_active
+            : pagination_inactive
+        } ${styles.pagination__button}`}
       >
         Next page
-      </span>
+      </button>
     </div>
   );
 };

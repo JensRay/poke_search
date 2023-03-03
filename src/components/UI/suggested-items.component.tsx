@@ -1,7 +1,6 @@
-import './suggested-items.styles.scss';
-
 import { SearchPokemonType } from '../../@types/types';
 import PokemonCard from '../PokemonCard/pokemon-card.component';
+import styles from './suggested-items.module.scss';
 
 var _ = require('underscore');
 
@@ -12,9 +11,9 @@ const SuggestedItems: React.FC<SuggestedItemsProps> = ({filteredPokemonList, nam
   const array_of_suggested = _.sample(suggestedPokemons, 3)
 
   return (
-    <div className="suggested-items__container">
+    <div className={styles.suggested_items__container}>
       <h2 className="text__theme">You Might Also Like</h2>
-      <div className="suggested-items__items">
+      <div className={styles.suggested_items__items}>
         {array_of_suggested.map((pokemon: SearchPokemonType) =>{ return (
           <PokemonCard pokemon={pokemon} key={Number(pokemon.id)} />
           )})

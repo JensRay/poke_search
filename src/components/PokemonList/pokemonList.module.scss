@@ -1,14 +1,14 @@
 @import "../../utilities/variables";
 
-.pokemon-list__container {
-  .pokemon-list__header {
+.pokemon_list__container {
+  .pokemon_list__header {
     display: grid;
     justify-content: center;
     row-gap: 10px;
   }
 }
 
-.pokemon-list__header {
+.pokemon_list__header {
   display: flex;
   justify-content: center;
   padding: 12px 0 16px 0;
@@ -33,11 +33,11 @@
 }
 
 @media only screen and (min-width: 600px) {
-  .pokemon-list__container {
+  .pokemon_list__container {
     margin: 0 auto;
     // padding-top: 1vw;
     width: 60vw;
-    .pokemon-list__header {
+    .pokemon_list__header {
       justify-content: space-around;
     }
   }
@@ -48,11 +48,11 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .pokemon-list__container {
+  .pokemon_list__container {
     margin: 0vw auto;
     // padding-top: 1vw;
     width: 73vw;
-    .pokemon-list__header {
+    .pokemon_list__header {
       // justify-content: space-between;
       display: flex;
       // margin: 1vw 0 1vw 26vw;
@@ -65,8 +65,8 @@
     grid-template-columns: 1fr 1fr 1fr;
   }
 
-  .pokemon-list__container {
-    .pokemon-list__header {
+  .pokemon_list__container {
+    .pokemon_list__header {
       justify-content: space-between;
       width: 72vw;
 

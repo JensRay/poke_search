@@ -1,9 +1,8 @@
-import './pokemonList.styles.scss';
-
 import { SearchPokemonType } from '../../@types/types';
 import DarkMode from '../DarkMode/colorMode.component';
 import Pagination from '../Pagination/pagination.component';
 import PokemonCard from '../PokemonCard/pokemon-card.component';
+import styles from './pokemonList.module.scss';
 
 interface PokemonListProps {filteredPokemonList:SearchPokemonType[],
   paginatedPokemonList: () => SearchPokemonType[];
@@ -28,10 +27,10 @@ const PokemonList: React.FC<PokemonListProps> = ({
   setIsLoading,
 }: PokemonListProps) => {
   return (
-    <div className="main-container background__theme">
-      <div className="pokemon-list__container">
-        <div className="pokemon-list__header">
-          <div className="additional_div_for_placing_pagination" />
+    <div className={`${styles.main_container} background__theme`}>
+      <div className={styles.pokemon_list__container}>
+        <div className={styles.pokemon_list__header}>
+          <div className={styles.additional_div_for_placing_pagination} />
           <Pagination
             limit={limit}
             offset={offset}
@@ -42,8 +41,8 @@ const PokemonList: React.FC<PokemonListProps> = ({
           />
           <DarkMode />
         </div>
-        <div className="pokemon-list__grid">
-            <div className="row">
+        <div className={styles.pokemon_list__grid}>
+          <div className={styles.row}>
               {paginatedPokemonList()?.map(
                 (pokemon: SearchPokemonType) =>
                   pokemon.name && (
@@ -57,7 +56,7 @@ const PokemonList: React.FC<PokemonListProps> = ({
               }
             </div>
         </div>
-        { isLoading || <div className="pagination__footer">
+        {isLoading || <div className={styles.pagination__footer}>
           <Pagination
             limit={limit}
             offset={offset}
@@ -67,7 +66,6 @@ const PokemonList: React.FC<PokemonListProps> = ({
             setPageNumber={setPageNumber}
           />
         </div>}
-
       </div>
     </div>
   );

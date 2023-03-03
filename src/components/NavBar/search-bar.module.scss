@@ -1,18 +1,10 @@
-@import '../../utilities/variables';
-@import url('https://unpkg.com/css.gg@2.0.0/icons/css/search.css');
+@import "../../utilities/variables";
 
-.search-bar {
+.search_bar {
   order: 1;
 
-  .search-bar__box {
+  .search_bar__box {
     position: relative;
-
-    .gg-search {
-      position: absolute;
-      top: 11px;
-      left: 10px;
-      // color: $dark_blue;
-    }
 
     input {
       height: 30px;
@@ -26,8 +18,8 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .search-bar {
-    .search-bar__box {
+  .search_bar {
+    .search_bar__box {
       input {
         width: 400px;
       }
@@ -35,10 +27,10 @@
   }
 }
 @media only screen and (min-width: 1201px) {
-  .search-bar {
+  .search_bar {
     order: 0;
 
-    .search-bar__box {
+    .search_bar__box {
       input {
         width: 400px;
       }

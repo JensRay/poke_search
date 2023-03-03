@@ -1,0 +1,41 @@
+@import "../../utilities/variables";
+
+.pokemon_page {
+  margin: 0 auto;
+  padding-top: 40px;
+  width: 1000px;
+}
+
+.pokemon_page__heading {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pokemon_page__heading_side_box {
+  width: 200px;
+}
+
+.pokemon_page__main_img {
+  background-color: $dark_blue;
+  width: 400px;
+  border-radius: 15px;
+}
+
+.pokemon_page__title {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.pokemon_page__pokemon_main_properties {
+  text-align: center;
+  span {
+    margin: 0 10px;
+  }
+}
+
+li {
+  span {
+    display: inline-block;
+    width: 20%;
+  }
+}

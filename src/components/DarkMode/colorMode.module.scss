@@ -1,6 +1,6 @@
 @import "../../utilities/variables";
 
-.color-mode__container {
+.color_mode__container {
   display: flex;
   justify-content: center;
   order: 1;
@@ -23,14 +23,14 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .color-mode__container {
+  .color_mode__container {
     justify-content: space-around;
     order: 2;
     width: 200px;
   }
 }
 
-.color-mode__title {
+.color_mode__title {
   font-size: 12px;
 }
 

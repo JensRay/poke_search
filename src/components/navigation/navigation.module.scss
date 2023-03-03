@@ -1,13 +1,12 @@
-@import '../../utilities/variables';
+@import "../../utilities/variables";
 
-.navigation-container {
+.navigation_container {
   padding: 5px 0;
   position: relative;
   z-index: 10;
-
 }
 
-.navigation-bar {
+.navigation_bar {
   height: 100px;
   display: flex;
   width: 70vw;
@@ -20,21 +19,20 @@
 }
 
 @media only screen and (min-width: 600px) {
-  .navigation-bar {
+  .navigation_bar {
     // height: 100px;
     justify-content: space-between;
-
   }
 }
 @media only screen and (min-width: 768px) {
-  .navigation-bar {
+  .navigation_bar {
     justify-content: space-between;
     // flex-direction: row;
   }
 }
 
 @media only screen and (min-width: 1201px) {
-  .navigation-bar {
+  .navigation_bar {
     height: 30px;
     flex-direction: row;
   }

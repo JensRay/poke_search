@@ -1,7 +1,7 @@
-import './spinner.styles.scss';
+import styles from './spinner.module.scss';
 
 const Spinner: React.FC = () => {
-  return <div className="loader" />
+  return <div className={styles.loader} />
 }
 
 export default Spinner;

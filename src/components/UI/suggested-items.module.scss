@@ -1,6 +1,6 @@
-@import '../../utilities/variables';
+@import "../../utilities/variables";
 
-.suggested-items__container {
+.suggested_items__container {
   margin-top: 40px;
   padding-bottom: 40px;
   h2 {
@@ -9,9 +9,9 @@
   }
 }
 
-.suggested-items__items {
+.suggested_items__items {
   display: flex;
   width: 800px;
   justify-content: space-around;
-  margin: 0 auto
+  margin: 0 auto;
 }
