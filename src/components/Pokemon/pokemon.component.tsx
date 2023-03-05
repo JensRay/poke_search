@@ -19,6 +19,9 @@ interface PokemonProperties {
   is_default: boolean;
   order: number;
   species: string;
+  types: [];
+  game_indices: [];
+  stats: [];
 }
 
 const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) => {
@@ -50,13 +53,10 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
         const imageUrl: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIndex!}.png`;
         const response = await fetch(url);
         const data = await response.json();
-        const { name, weight, height, base_experience, is_default, order }: PokemonProperties = data;
+        const { name, weight, height, base_experience, is_default, order, types, game_indices, stats }: PokemonProperties = data;
         const species = data.species.name;
         const abilities = data.abilities?.map((ability: { ability: { name: string; }; }) => ability.ability.name);
         const forms = data.forms?.map((form: { name: string; }) => form.name);
-        const types = data.types;
-        const gameIndices = data.game_indices;
-        const stats = data.stats;
 
         setName(name);
         setImageUrl(imageUrl);
@@ -69,7 +69,7 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
         setAbilities(abilities);
         setForms(forms);
         setTypes(types);
-        setGameIndices(gameIndices);
+        setGameIndices(game_indices);
         setStats(stats);
         setIsLoading(false);
       } catch (error) {
