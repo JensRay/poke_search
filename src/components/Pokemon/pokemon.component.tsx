@@ -53,6 +53,7 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
         const imageUrl: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIndex!}.png`;
         const response = await fetch(url);
         const data = await response.json();
+        console.log(data)
         const { name, weight, height, base_experience, is_default, order, types, game_indices, stats }: PokemonProperties = data;
         const species = data.species.name;
         const abilities = data.abilities?.map((ability: { ability: { name: string; }; }) => ability.ability.name);

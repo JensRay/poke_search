@@ -1,3 +1,5 @@
+import '../../utilities/icons.styles.scss';
+
 import styles from './search-bar.module.scss';
 
 interface SearchBarProps {

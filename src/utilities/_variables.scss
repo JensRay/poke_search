@@ -1,5 +1,4 @@
-@import url("https://unpkg.com/css.gg@2.0.0/icons/css/search.css");
-
+// Colors
 $brown: #4b4343;
 $dark_blue: #367aac;
 $white: #ffffff;
@@ -13,13 +12,6 @@ $light_blue: #138ae0;
 // dark mode
 $navy_blue: #1f374a;
 $light_brown: #707070;
-
-// search icon
-.gg-search {
-  position: absolute;
-  top: 23px;
-  left: 10px;
-}
 
 // dark theme
 .dark {
