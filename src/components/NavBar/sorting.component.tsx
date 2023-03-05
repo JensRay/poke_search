@@ -1,8 +1,7 @@
-import './sorting.styles.scss';
-
 import { useState } from 'react';
 
 import { SORTING_TYPES } from '../../utilities/constants';
+import Dropdown from '../UI/dropdown.compoment';
 
 interface SortingProps {
   sortingType: string;
@@ -25,44 +24,7 @@ const Sorting:React.FC<SortingProps> = ({ sortingType, setSortingType, sortPokem
   };
 
   return (
-    <div className="list__dropdown ">
-      <button
-        className="list__dropdown__button box_shadow__theme inner_background__theme border__theme"
-        onClick={toggleList}
-      >
-        <span className="grayed_text__theme">Sort items</span>
-        {!isActive ? (
-          <span className="third_text__theme">&#65088;</span>
-        ) : (
-          <span className="third_text__theme">&#65087;</span>
-        )}
-      </button>
-      {isActive ? (
-        <div
-          className="list__dropdown-container box_shadow__theme inner_background__theme"
-
-          >
-          {SORTING_TYPES.map((n) => {
-            return (
-              <button
-                onClick={handleClick}
-                key={n}
-                value={n}
-                className={
-                  sortingType !== n
-                    ? "list__dropdown__active text__theme inner_background__theme"
-                    : "grayed_text__theme inner_background__theme"
-                }
-              >
-                {n}
-              </button>
-            );
-          })}
-        </div>
-      ) : (
-        ""
-      )}
-    </div>
+    <Dropdown dropdown_list={SORTING_TYPES} toggleList={toggleList} handleClick={handleClick} isActive={isActive} type={sortingType} title={ sortingType} />
   );
 };
 

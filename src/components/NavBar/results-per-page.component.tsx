@@ -1,8 +1,7 @@
-import './results-per-page.styles.scss';
-
 import { useState } from 'react';
 
 import { ITEMS_PER_PAGE } from '../../utilities/constants';
+import Dropdown from '../UI/dropdown.compoment';
 
 interface ResultsPerPageProps {
   limit: number;
@@ -11,61 +10,25 @@ interface ResultsPerPageProps {
   setPageNumber: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const ResultsPerPage: React.FC<ResultsPerPageProps> = ({ limit, setLimit, setOffset, setPageNumber }: ResultsPerPageProps) =>
-  {
-    const [isActive, setIsActive] = useState<boolean>(false);
+const ResultsPerPage: React.FC<ResultsPerPageProps> = ({ limit, setLimit, setOffset, setPageNumber }: ResultsPerPageProps) => {
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const title = `Showing ${limit} results`;
 
-    const toggleList = () => {
-      setIsActive((isActive) => !isActive);
-    };
-
-    const handleClick = ({currentTarget}: React.MouseEvent<HTMLButtonElement>) : void => {
-      setOffset(0);
-      const value: string = currentTarget.value;
-      setLimit(parseInt(value));
-      setIsActive(false);
-      setPageNumber(1);
-    };
-
-    return (
-      <div className="results-per-page">
-        <button
-          className="results-per-page__dropdown__button box_shadow__theme inner_background__theme border__theme"
-          onClick={toggleList}
-        >
-          <span className="grayed_text__theme">{`Showing ${limit} results`}</span>
-          {!isActive ? (
-            <span className="third_text__theme">&#65088;</span>
-          ) : (
-            <span className="third_text__theme">&#65087;</span>
-          )}
-        </button>
-        {isActive ? (
-          <div
-            className="results-per-page__dropdown-container  box_shadow__theme inner_background__theme"
-            >
-            {ITEMS_PER_PAGE.map((n) => {
-              return (
-                <button
-                  onClick={handleClick}
-                  key={n}
-                  value={n}
-                  className={
-                    limit !== n
-                      ? "results-per-page__active text__theme inner_background__theme"
-                      : "grayed_text__theme inner_background__theme"
-                  }
-                >
-                  Show {n} results
-                </button>
-              );
-            })}
-          </div>
-        ) : (
-          ""
-        )}
-      </div>
-    );
+  const toggleList = () => {
+    setIsActive((isActive) => !isActive);
   };
+
+  const handleClick = ({currentTarget}: React.MouseEvent<HTMLButtonElement>) : void => {
+    setOffset(0);
+    const value: string = currentTarget.value;
+    setLimit(parseInt(value));
+    setIsActive(false);
+    setPageNumber(1);
+  };
+
+  return (
+    <Dropdown dropdown_list={ITEMS_PER_PAGE} toggleList={toggleList} handleClick={handleClick} isActive={isActive} type={limit} title={title} />
+  );
+};
 
 export default ResultsPerPage;

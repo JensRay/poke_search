@@ -1,3 +1,5 @@
+import './App.scss';
+
 import { useEffect, useState } from 'react';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 
@@ -16,7 +18,7 @@ const App: React.FC = () =>  {
   const [pokemonList, setPokemonList] = useState<SearchPokemonType[]>([]);
   const [filteredPokemonList, setFilteredPokemonList] = useState<SearchPokemonType[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
-  const [sortingType, setSortingType] = useState<string>('');
+  const [sortingType, setSortingType] = useState<string>('Sort items');
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const filterSearchedPokemons = (searchedPhrase: string) => {

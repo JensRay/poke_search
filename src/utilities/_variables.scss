@@ -14,12 +14,14 @@ $light_blue: #138ae0;
 $navy_blue: #1f374a;
 $light_brown: #707070;
 
+// search icon
 .gg-search {
   position: absolute;
   top: 23px;
   left: 10px;
 }
 
+// dark theme
 .dark {
   .text__theme {
     color: white;
@@ -54,6 +56,7 @@ $light_brown: #707070;
   }
 }
 
+// light theme
 .light {
   .text__theme {
     color: black;
