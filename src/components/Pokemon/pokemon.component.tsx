@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { SearchPokemonType } from '../../@types/types';
 import Button from '../../utilities/Button';
 import { capitalize } from '../../utilities/functions';
+import defaultImage from '../../utilities/noImagePlaceholder.svg';
 import Spinner from '../../utilities/spinner/Spinner';
 import DarkMode from '../DarkMode/colorMode.component';
 import PropertiesDropdown from '../UI/properties-dropdown.component';
@@ -26,8 +27,7 @@ interface PokemonProperties {
 
 const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) => {
   const [name, setName] = useState<string>("");
-  const [pokemonIndex, setPokemonIndex] = useState<string>('1');
-  const [imageUrl, setImageUrl] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>("../../utilities/default-image.jpeg");
   const [weight, setWeight] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
   const [baseExperience, setBaseExperience] = useState<number>(0);
@@ -39,7 +39,6 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
   const [types, setTypes] = useState<{ type: { name: string; }, slot: number; }[]>([])
   const [gameIndices, setGameIndices] = useState<{ version: { name: string; }, game_index: number; }[]>([])
   const [stats, setStats] = useState<{base_stat: number, effort: number, stat: {name: string}}[]>([])
-  const [url, setUrl] = useState<string>('https://pokeapi.co/api/v2/pokemon/1');
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const id = useParams().id as string;
@@ -48,9 +47,8 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
     async function fetchData() {
       try {
         setIsLoading(true);
-        setPokemonIndex(id);
-        setUrl(`https://pokeapi.co/api/v2/pokemon/${pokemonIndex!}`);
-        const imageUrl: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIndex!}.png`;
+        const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+        const imageUrl: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id!}.png`;
         const response = await fetch(url);
         const data = await response.json();
         const { name, weight, height, base_experience, is_default, order, types, game_indices, stats }: PokemonProperties = data;
@@ -76,7 +74,12 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
       }
     }
     fetchData();
-  }, [id, pokemonIndex, url]);
+  }, [id]);
+
+  function ImageWithFallback() {
+    const onError = () => setImageUrl(defaultImage)
+    return <img className={styles.pokemon_page__main_img} src={imageUrl ? imageUrl : defaultImage} onError={onError} alt={name} />
+  }
 
   const pokemon_html = <div className={`${styles.pokemon_background} background__theme`}>
     <div className={styles.pokemon_page}>
@@ -85,7 +88,8 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
           <Button to='/' text='&#10094; ' text2='Back'/>
         </div>
         <div className={styles.pokemon_page__heading_box}>
-          <img className={styles.pokemon_page__main_img} src={imageUrl} alt={name} />
+          {/* <img className={styles.pokemon_page__main_img} src={ImageWithFallback} alt={name} /> */}
+          {ImageWithFallback()}
         </div>
         <div className={styles.pokemon_page__heading_side_box}>
           <DarkMode />

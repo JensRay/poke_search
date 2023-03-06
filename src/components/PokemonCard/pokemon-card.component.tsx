@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { SearchPokemonType } from '../../@types/types';
+import defaultImage from '../../utilities/noImagePlaceholder.svg';
 import Spinner from '../../utilities/spinner/Spinner';
 import styles from './pokemon-card.module.scss';
 
@@ -45,6 +46,11 @@ const PokemonCard: React.FC<PokemonCardInterface> = ({pokemon, setIsLoading}: Po
     fetchData();
   }, [id, pokemonIndex, url, setIsLoading]);
 
+  function ImageWithFallback() {
+    const onError = () => setImageUrl(defaultImage)
+    return <img style={{ display: imageLoading ? "none" : "block" }} src={imageUrl ? imageUrl : defaultImage} onError={onError} alt={name} onLoad={imageLoaded} />
+  }
+
   return (
     <div className={`${styles.pokemon_card__container} text__theme inner_background__theme`}>
       <Link to={`/pokemon/${pokemonIndex}`}>
@@ -52,7 +58,8 @@ const PokemonCard: React.FC<PokemonCardInterface> = ({pokemon, setIsLoading}: Po
           <div style={{ display: imageLoading ? "block" : "none" }}>
             <Spinner />
           </div>
-          <img style={{ display: imageLoading ? "none" : "block" }} src={imageUrl} alt={name} onLoad={imageLoaded} />
+          {/* <img style={{ display: imageLoading ? "none" : "block" }} src={imageUrl} alt={name} onLoad={imageLoaded} /> */}
+          {ImageWithFallback()}
         </div>
       </Link>
       <h3 className={styles.pokemon_card__title}>{name}</h3>

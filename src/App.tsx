@@ -100,7 +100,6 @@ const App: React.FC = () =>  {
             weight: data.weight,
             height: data.height,
             id: data.id,
-            key: data.id
           };
         })
       );
