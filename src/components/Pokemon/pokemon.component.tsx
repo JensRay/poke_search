@@ -25,21 +25,40 @@ interface PokemonProperties {
   stats: [];
 }
 
+interface PokemonObject {
+  imageUrl: string;
+  name: string;
+  weight: number;
+  height: number;
+  base_experience: number;
+  is_default: boolean;
+  order: number;
+  types: { type: { name: string; }, slot: number; }[];
+  game_indices: { version: { name: string; }, game_index: number; }[];
+  stats: {base_stat: number, effort: number, stat: {name: string}}[];
+  species: string;
+  abilities: [];
+  forms: [];
+}
+
 const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) => {
-  const [name, setName] = useState<string>("");
-  const [imageUrl, setImageUrl] = useState<string>("../../utilities/default-image.jpeg");
-  const [weight, setWeight] = useState<number>(0);
-  const [height, setHeight] = useState<number>(0);
-  const [baseExperience, setBaseExperience] = useState<number>(0);
-  const [isDefault, setIsDefault] = useState<boolean>(true);
-  const [order, setOrder] = useState<number>(0);
-  const [species, setSpecies] = useState<string>("");
-  const [abilities, setAbilities] = useState<string[]>([]);
-  const [forms, setForms] = useState<string[]>([])
-  const [types, setTypes] = useState<{ type: { name: string; }, slot: number; }[]>([])
-  const [gameIndices, setGameIndices] = useState<{ version: { name: string; }, game_index: number; }[]>([])
-  const [stats, setStats] = useState<{base_stat: number, effort: number, stat: {name: string}}[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [pokemon, setPokemon] = useState <
+  PokemonObject>({
+    imageUrl: "../../utilities/default-image.jpeg",
+    name: '',
+    weight: 0,
+    height: 0,
+    base_experience: 0,
+    is_default: true,
+    order: 0,
+    types: [],
+    game_indices: [],
+    stats: [],
+    species: '',
+    abilities: [],
+    forms: [],
+  })
 
   const id = useParams().id as string;
 
@@ -47,27 +66,19 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
     async function fetchData() {
       try {
         setIsLoading(true);
+
         const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-        const imageUrl: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id!}.png`;
         const response = await fetch(url);
         const data = await response.json();
+        const imageUrl: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id!}.png`;
         const { name, weight, height, base_experience, is_default, order, types, game_indices, stats }: PokemonProperties = data;
-        const species = data.species.name;
+        const species = capitalize(data.species.name);
         const abilities = data.abilities?.map((ability: { ability: { name: string; }; }) => ability.ability.name);
         const forms = data.forms?.map((form: { name: string; }) => form.name);
-        setName(name);
-        setImageUrl(imageUrl);
-        setWeight(weight);
-        setHeight(height);
-        setBaseExperience(base_experience);
-        setIsDefault(is_default);
-        setOrder(order);
-        setSpecies(capitalize(species));
-        setAbilities(abilities);
-        setForms(forms);
-        setTypes(types);
-        setGameIndices(game_indices);
-        setStats(stats);
+
+        setPokemon({
+          imageUrl: imageUrl, name: name, weight: weight, height: height, base_experience: base_experience, is_default: is_default, order: order, types: types, game_indices: game_indices, stats: stats, species: species, abilities: abilities, forms: forms
+        })
         setIsLoading(false);
       } catch (error) {
         console.log(error)
@@ -76,8 +87,23 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
     fetchData();
   }, [id]);
 
+  const { imageUrl,
+    name,
+    weight,
+    height,
+    base_experience,
+    is_default,
+    order,
+    types,
+    game_indices,
+    stats,
+    species,
+    abilities,
+    forms
+  } = pokemon;
+
   function ImageWithFallback() {
-    const onError = () => setImageUrl(defaultImage)
+    const onError = () => setPokemon((prev_state) => { return { ...prev_state, imageUrl: defaultImage }})
     return <img className={styles.pokemon_page__main_img} src={imageUrl ? imageUrl : defaultImage} onError={onError} alt={name} />
   }
 
@@ -88,7 +114,6 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
           <Button to='/' text='&#10094; ' text2='Back'/>
         </div>
         <div className={styles.pokemon_page__heading_box}>
-          {/* <img className={styles.pokemon_page__main_img} src={ImageWithFallback} alt={name} /> */}
           {ImageWithFallback()}
         </div>
         <div className={styles.pokemon_page__heading_side_box}>
@@ -99,8 +124,8 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
       <div className={`${styles.pokemon_page__pokemon_main_properties} text__theme`}>
         <span>Height: {height}</span>
         <span>Weight: {weight}</span>
-        <span>Base experience: {baseExperience}</span>
-        <span>Default: {isDefault.toString()}</span>
+        <span>Base experience: {base_experience}</span>
+        <span>Default: {is_default.toString()}</span>
         <span>Order: {order}</span>
         <span>Species: {species}</span>
       </div>
@@ -124,7 +149,7 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
           ))}
         </PropertiesDropdown>
         <PropertiesDropdown title={"Game Indices"}>
-          {gameIndices?.map((gi) => (
+          {game_indices?.map((gi) => (
             <li key={gi.version.name}>
               <span>Game Index: {gi.game_index}</span>
               <span>Version: {capitalize(gi.version.name)}</span>
