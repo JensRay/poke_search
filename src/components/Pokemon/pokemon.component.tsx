@@ -39,7 +39,7 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
   const [types, setTypes] = useState<{ type: { name: string; }, slot: number; }[]>([])
   const [gameIndices, setGameIndices] = useState<{ version: { name: string; }, game_index: number; }[]>([])
   const [stats, setStats] = useState<{base_stat: number, effort: number, stat: {name: string}}[]>([])
-  const [url, setUrl] = useState<string>('');
+  const [url, setUrl] = useState<string>('https://pokeapi.co/api/v2/pokemon/1');
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const id = useParams().id as string;
@@ -53,12 +53,10 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
         const imageUrl: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIndex!}.png`;
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data)
         const { name, weight, height, base_experience, is_default, order, types, game_indices, stats }: PokemonProperties = data;
         const species = data.species.name;
         const abilities = data.abilities?.map((ability: { ability: { name: string; }; }) => ability.ability.name);
         const forms = data.forms?.map((form: { name: string; }) => form.name);
-
         setName(name);
         setImageUrl(imageUrl);
         setWeight(weight);
