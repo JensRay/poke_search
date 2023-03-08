@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Button from '../../utilities/Button';
@@ -59,30 +59,31 @@ const Pokemon: React.FC = () => {
 
   const id = useParams().id as string;
 
+  const fetchData = useCallback(async () => {
+   try {
+     setIsLoading(true);
+
+     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+     const response = await fetch(url);
+     const data = await response.json();
+     const imageUrl: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id!}.png`;
+     const { name, weight, height, base_experience, is_default, order, types, game_indices, stats }: PokemonProperties = data;
+     const species = capitalize(data.species.name);
+     const abilities = data.abilities?.map((ability: { ability: { name: string; }; }) => ability.ability.name);
+     const forms = data.forms?.map((form: { name: string; }) => form.name);
+
+     setPokemon({
+       imageUrl: imageUrl, name: name, weight: weight, height: height, base_experience: base_experience, is_default: is_default, order: order, types: types, game_indices: game_indices, stats: stats, species: species, abilities: abilities, forms: forms
+     })
+     setIsLoading(false);
+   } catch (error) {
+     console.log(error)
+   }
+}, [id])
+
   useEffect(() => {
-    async function fetchData() {
-      try {
-        setIsLoading(true);
-
-        const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        const imageUrl: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id!}.png`;
-        const { name, weight, height, base_experience, is_default, order, types, game_indices, stats }: PokemonProperties = data;
-        const species = capitalize(data.species.name);
-        const abilities = data.abilities?.map((ability: { ability: { name: string; }; }) => ability.ability.name);
-        const forms = data.forms?.map((form: { name: string; }) => form.name);
-
-        setPokemon({
-          imageUrl: imageUrl, name: name, weight: weight, height: height, base_experience: base_experience, is_default: is_default, order: order, types: types, game_indices: game_indices, stats: stats, species: species, abilities: abilities, forms: forms
-        })
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error)
-      }
-    }
     fetchData();
-  }, [id]);
+  }, [fetchData]);
 
   const { imageUrl,
     name,
