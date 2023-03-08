@@ -10,8 +10,18 @@
     background-color: transparent;
   }
 
-  button.pagination__button:hover {
+  button:first-child {
+    width: 110px;
+  }
+
+  button:last-child {
+    width: 80px;
+  }
+
+  button.pagination__active.pagination__button:hover {
     text-decoration: underline;
+    font-weight: 600;
+    transition: text-decoration 0.3s, font-weight 0.3s;
   }
 
   .pagination__active {
@@ -19,7 +29,7 @@
   }
 
   .pagination__inactive {
-    cursor: not-allowed;
+    cursor: default;
   }
 }
 

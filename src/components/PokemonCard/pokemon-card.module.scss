@@ -64,13 +64,22 @@
   margin-top: 3px;
 
   a {
-    color: $dark_blue;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
     text-decoration: none;
+    transition: font-size 0.5s;
+    color: inherit;
   }
 
-  div:hover {
-    text-decoration: underline;
+  a:hover {
+    transition: font-size 0.5s;
+    font-size: 12px;
+  }
+}
+
+.pokemon_card__details_link:hover {
+  span {
+    border-bottom: 1px solid;
+    transition: border-bottom 0.5s;
   }
 }

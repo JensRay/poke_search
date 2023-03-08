@@ -83,9 +83,11 @@ const PokemonCard: React.FC<PokemonCardInterface> = ({ pokemon }: PokemonCardInt
         </div>
       </div>
       <div className={styles.pokemon_card__details_link}>
-        <Link to={`/pokemon/${pokemonIndex}`} className="third_text__theme">
-          See Details
-        </Link>
+        <span className='third_text__theme'>
+          <Link to={`/pokemon/${pokemonIndex}`}>
+            See Details
+          </Link>
+        </span>
       </div>
     </div>
   );
