@@ -1,15 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
+import PokemonContext from '../../context/PokemonContext';
 import { SORTING_TYPES } from '../../utilities/constants';
 import Dropdown from '../UI/dropdown.compoment';
 
-interface SortingProps {
-  sortingType: string;
-  setSortingType: React.Dispatch<React.SetStateAction<string>>;
-  sortPokemons: (value: string) => void;
-}
-
-const Sorting:React.FC<SortingProps> = ({ sortingType, setSortingType, sortPokemons }: SortingProps) => {
+const Sorting: React.FC = () => {
+  const {sortingType, setSortingType, sortPokemons } = useContext(PokemonContext)
   const [isActive, setIsActive] = useState<boolean>(false);
 
   const toggleList = () => {

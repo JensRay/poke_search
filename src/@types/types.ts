@@ -16,6 +16,6 @@ export type SortingType =
   | "From Z-A"
   | "By Height"
   | "By Weight"
-  | "";
+  | "Sort items";
 
 export type ChildrenProps = { children: React.ReactNode };

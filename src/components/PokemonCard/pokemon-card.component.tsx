@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { SearchPokemonType } from '../../@types/types';
+import PokemonContext from '../../context/PokemonContext';
 import defaultImage from '../../utilities/noImagePlaceholder.svg';
 import Spinner from '../../utilities/spinner/Spinner';
 import styles from './pokemon-card.module.scss';
 
 interface PokemonCardInterface {
   pokemon: SearchPokemonType;
-  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PokemonCard: React.FC<PokemonCardInterface> = ({pokemon, setIsLoading}: PokemonCardInterface) => {
+const PokemonCard: React.FC<PokemonCardInterface> = ({ pokemon }: PokemonCardInterface) => {
+  const  {setIsLoading} = useContext(PokemonContext)
   const [pokemonIndex, setPokemonIndex] = useState<string>();
   const [imageUrl, setImageUrl] = useState<string>();
   const [abilities, setAbilities] = useState<string[]>([]);
@@ -58,7 +59,6 @@ const PokemonCard: React.FC<PokemonCardInterface> = ({pokemon, setIsLoading}: Po
           <div style={{ display: imageLoading ? "block" : "none" }}>
             <Spinner />
           </div>
-          {/* <img style={{ display: imageLoading ? "none" : "block" }} src={imageUrl} alt={name} onLoad={imageLoaded} /> */}
           {ImageWithFallback()}
         </div>
       </Link>

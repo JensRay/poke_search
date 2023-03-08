@@ -1,133 +1,41 @@
 import './App.scss';
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 
-import { BasePokemonType, SearchPokemonType } from './@types/types';
 import ColorModeProvider from './context/ColorModeProvider';
+import PokemonContext from './context/PokemonContext';
 import PokemonPage from './pages/Pokemon.page';
 import PokemonListPage from './pages/PokemonList.page';
 import RootLayoutPage from './pages/RootLayout.page';
 import Spinner from './utilities/spinner/Spinner';
 
-const App: React.FC = () =>  {
-  const [offset, setOffset] = useState<number>(0);
-  const [limit, setLimit] = useState<number>(20);
-  const [searchedPhrase, setSearchedPhrase] = useState<string>("");
-  const [basePokemonList, setBasePokemonList] = useState<BasePokemonType[]>([]);
-  const [pokemonList, setPokemonList] = useState<SearchPokemonType[]>([]);
-  const [filteredPokemonList, setFilteredPokemonList] = useState<SearchPokemonType[]>([]);
-  const [pageNumber, setPageNumber] = useState<number>(1);
-  const [sortingType, setSortingType] = useState<string>('Sort items');
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+const App: React.FC = () => {
+  const {
+    pokemonList,
+    isLoading,
+    getPokemonsList,
+    getAllPokemons,
+    setFilteredPokemonList
+  } = useContext(PokemonContext);
 
-  const filterSearchedPokemons = (searchedPhrase: string) => {
-      const pokemons = pokemonList.filter((pokemon) =>
-        pokemon.name.includes(searchedPhrase)
-      );
-      setFilteredPokemonList(pokemons);
-  };
-
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value
-    setSearchedPhrase(value.trim().toLowerCase());
-    filterSearchedPokemons(value.trim().toLowerCase());
-  };
-
-  const sortPokemons = (type:string) => {
-    switch (type) {
-      case "From A-Z":
-        const sortA_Z = filteredPokemonList.sort((a, b) =>
-          a.name > b.name ? 1 : b.name > a.name ? -1 : 0
-        );
-        setFilteredPokemonList(sortA_Z);
-        break;
-      case "From Z-A":
-        const sortZ_A = filteredPokemonList.sort((a, b) =>
-          a.name < b.name ? 1 : b.name < a.name ? -1 : 0
-        );
-        setFilteredPokemonList(sortZ_A);
-        break;
-      case "By Height":
-        const sortHeight = filteredPokemonList.sort(
-          (a, b) => a.height - b.height
-        );
-        setFilteredPokemonList(sortHeight);
-        break;
-      case "By Weight":
-        const sortWeight = filteredPokemonList.sort(
-          (a, b) => a.weight - b.weight
-        );
-        setFilteredPokemonList(sortWeight);
-        break;
-      default:
-        console.log("Unknown Type");
-    }
-  };
-
-  const paginatedPokemonList = ():SearchPokemonType[] => {
-    const filtered = filteredPokemonList.slice(offset, offset + limit);
-    return filtered;
-  };
-
-    const getPokemonsList = async () => {
-    try {
-      const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000`
-      );
-      const data = await response.json();
-
-      setBasePokemonList(data.results);
-    } catch (error) {
-      // setError(error);
-      console.log(error);
-    }
-  };
+  useEffect(() => {
+    getAllPokemons();
+  }, [getAllPokemons]);
 
   useEffect(() => {
     getPokemonsList();
-  }, []);
-
-  useEffect(() => {
-    const getAllPokemons = async () => {
-      const responses = await Promise.all(
-        basePokemonList.map(async (pokemon) => {
-          const res = await fetch(pokemon.url);
-          const data = await res.json();
-
-          return {
-            ...pokemon,
-            weight: data.weight,
-            height: data.height,
-            id: data.id,
-          };
-        })
-      );
-      setPokemonList(responses);
-    };
-
-    getAllPokemons();
-  }, [basePokemonList]);
+  }, [getPokemonsList]);
 
   useEffect(() => {
     setFilteredPokemonList(pokemonList);
-  }, [pokemonList]);
+  }, [pokemonList, setFilteredPokemonList]);
 
   const router = createBrowserRouter([
     {
       path: "/",
       element: (
-        <RootLayoutPage
-          searchedPhrase={searchedPhrase}
-          sortingType={sortingType}
-          handleSearch={handleSearch}
-          limit={limit}
-          setLimit={setLimit}
-          setOffset={setOffset}
-          setPageNumber={setPageNumber}
-          setSortingType={setSortingType}
-          sortPokemons={sortPokemons}
-        />
+        <RootLayoutPage />
       ),
       children: [
         {
@@ -138,27 +46,14 @@ const App: React.FC = () =>  {
           path: "/pokemons",
           element: (
             <>
-              <PokemonListPage
-              basePokemonList={basePokemonList}
-              pokemonList={pokemonList}
-              filteredPokemonList={filteredPokemonList}
-              limit={limit}
-              offset={offset}
-              setOffset={setOffset}
-              pageNumber={pageNumber}
-              setPageNumber={setPageNumber}
-              paginatedPokemonList={paginatedPokemonList}
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-              />
-              {
-              isLoading && <Spinner />}
-              </>
+              <PokemonListPage />
+              { isLoading && <Spinner /> }
+            </>
           ),
         },
       ],
     },
-    { path: "/pokemon/:id", element: <PokemonPage filteredPokemonList={filteredPokemonList} /> },
+    { path: "/pokemon/:id", element: <PokemonPage /> },
   ]);
 
   return (

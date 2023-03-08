@@ -1,12 +1,16 @@
+import { useContext } from 'react';
+
 import { SearchPokemonType } from '../../@types/types';
+import PokemonContext from '../../context/PokemonContext';
 import PokemonCard from '../PokemonCard/pokemon-card.component';
 import styles from './suggested-items.module.scss';
 
 var _ = require('underscore');
 
-interface SuggestedItemsProps { filteredPokemonList: SearchPokemonType[], name: string; }
+interface SuggestedItemsProps { name: string; }
 
-const SuggestedItems: React.FC<SuggestedItemsProps> = ({filteredPokemonList, name}: SuggestedItemsProps) => {
+const SuggestedItems: React.FC<SuggestedItemsProps> = ({ name }: SuggestedItemsProps) => {
+  const {filteredPokemonList} = useContext(PokemonContext)
   const suggestedPokemons = filteredPokemonList.filter((p) => p.name !== name)
   const array_of_suggested = _.sample(suggestedPokemons, 3)
 

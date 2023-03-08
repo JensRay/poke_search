@@ -1,23 +1,16 @@
-import { SearchPokemonType } from '../../@types/types';
+import { useContext } from 'react';
+
+import PokemonContext from '../../context/PokemonContext';
 import styles from './pagination.module.scss';
 
-interface PaginationProps {
-  offset: number
-  limit: number,
-  setOffset: React.Dispatch<React.SetStateAction<number>>,
-  filteredPokemonList: SearchPokemonType[],
-  pageNumber: number,
-  setPageNumber: React.Dispatch<React.SetStateAction<number>>,
-}
-
-const Pagination: React.FC<PaginationProps> = ({
-  offset,
+const Pagination: React.FC = () => {
+  const {offset,
   limit,
   setOffset,
   filteredPokemonList,
   pageNumber,
-  setPageNumber,
-}: PaginationProps) => {
+  setPageNumber } = useContext(PokemonContext)
+
   const paginateNext = () => {
     if (offset + limit < filteredPokemonList.length) {
       setOffset(offset + limit);

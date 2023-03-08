@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { SearchPokemonType } from '../../@types/types';
 import Button from '../../utilities/Button';
 import { capitalize } from '../../utilities/functions';
 import defaultImage from '../../utilities/noImagePlaceholder.svg';
@@ -11,7 +10,6 @@ import PropertiesDropdown from '../UI/properties-dropdown.component';
 import SuggestedItems from '../UI/suggested-items.component';
 import styles from './pokemon.module.scss';
 
-interface PokemonProps { filteredPokemonList: SearchPokemonType[]; }
 interface PokemonProperties {
   name: string;
   weight: number;
@@ -41,10 +39,9 @@ interface PokemonObject {
   forms: [];
 }
 
-const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) => {
+const Pokemon: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [pokemon, setPokemon] = useState <
-  PokemonObject>({
+  const [pokemon, setPokemon] = useState <PokemonObject>({
     imageUrl: "../../utilities/default-image.jpeg",
     name: '',
     weight: 0,
@@ -166,7 +163,7 @@ const Pokemon: React.FC<PokemonProps> = ({ filteredPokemonList }: PokemonProps) 
           ))}
         </PropertiesDropdown>
       </div>
-      <SuggestedItems filteredPokemonList={filteredPokemonList} name={name} />
+      <SuggestedItems name={name} />
     </div>
   </div>;
   return (

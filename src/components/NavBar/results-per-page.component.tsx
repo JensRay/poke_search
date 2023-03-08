@@ -1,17 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
+import PokemonContext from '../../context/PokemonContext';
 import { ITEMS_PER_PAGE } from '../../utilities/constants';
 import Dropdown from '../UI/dropdown.compoment';
 
-interface ResultsPerPageProps {
-  limit: number;
-  setLimit: React.Dispatch<React.SetStateAction<number>>;
-  setOffset: React.Dispatch<React.SetStateAction<number>>;
-  setPageNumber: React.Dispatch<React.SetStateAction<number>>;
-}
-
-const ResultsPerPage: React.FC<ResultsPerPageProps> = ({ limit, setLimit, setOffset, setPageNumber }: ResultsPerPageProps) => {
+const ResultsPerPage: React.FC = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
+  const {limit, setLimit, setOffset, setPageNumber} = useContext(PokemonContext)
   const title = `Showing ${limit} results`;
 
   const toggleList = () => {
