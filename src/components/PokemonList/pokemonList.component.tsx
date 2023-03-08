@@ -9,7 +9,7 @@ import styles from './pokemonList.module.scss';
 
 const PokemonList: React.FC = () => {
 
-  const {paginatedPokemonList, isLoading } = useContext(PokemonContext)
+  const { paginatedPokemonList, isLoading } = useContext(PokemonContext)
 
   return (
     <div className={`${styles.main_container} background__theme`}>
@@ -34,7 +34,7 @@ const PokemonList: React.FC = () => {
             </div>
         </div>
         {isLoading || <div className={styles.pagination__footer}>
-          <Pagination />
+         { paginatedPokemonList().length > 8 ? <Pagination /> : ''}
         </div>}
       </div>
     </div>
