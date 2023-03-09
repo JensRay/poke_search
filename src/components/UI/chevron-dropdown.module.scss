@@ -1,0 +1,10 @@
+@import "../../utilities/variables";
+
+span.chevron_dropdown {
+  position: relative;
+  top: 5px;
+
+  &.open {
+    top: -5px;
+  }
+}

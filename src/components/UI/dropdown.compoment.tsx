@@ -1,5 +1,8 @@
+import '../../utilities/icons.styles.scss';
+
 import React from 'react';
 
+import ChevronDropdown from './chevron-dropdown.component';
 import styles from './dropdown.module.scss';
 
 interface DropdownProps {
@@ -26,12 +29,8 @@ const Dropdown: React.FC<DropdownProps> = ({ dropdown_list, toggleList, handleCl
         className={`${styles.list__dropdown__button} box_shadow__theme inner_background__theme border__theme`}
         onClick={toggleList}
       >
-        <span className="grayed_text__theme">{title}</span>
-        {!isActive ? (
-          <span className="third_text__theme">&#65088;</span>
-        ) : (
-          <span className="third_text__theme">&#65087;</span>
-        )}
+        <span className='grayed_text__theme'>{title}</span>
+        <ChevronDropdown isActive={isActive} />
       </button>
       {isActive ? (
         <div
