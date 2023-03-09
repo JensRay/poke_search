@@ -52,6 +52,8 @@ const PokemonCard: React.FC<PokemonCardInterface> = ({ pokemon }: PokemonCardInt
     return <img style={{ display: imageLoading ? "none" : "block" }} src={imageUrl ? imageUrl : defaultImage} onError={onError} alt={name} onLoad={imageLoaded} />
   }
 
+  const big_title = name.length > 17 ? styles.long_title : ''
+
   return (
     <div className={`${styles.pokemon_card__container} text__theme inner_background__theme`}>
       <Link to={`/pokemon/${pokemonIndex}`}>
@@ -62,7 +64,7 @@ const PokemonCard: React.FC<PokemonCardInterface> = ({ pokemon }: PokemonCardInt
           {ImageWithFallback()}
         </div>
       </Link>
-      <h3 className={styles.pokemon_card__title}>{name}</h3>
+      <h3 className={`${styles.pokemon_card__title} ${big_title}`}>{name}</h3>
       <div className={styles.pokemon_card__properties}>
         <div className={styles.pokemon_card__property}>
           <span className=''>Height:</span>
